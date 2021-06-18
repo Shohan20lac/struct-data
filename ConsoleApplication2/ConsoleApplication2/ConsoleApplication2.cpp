@@ -110,25 +110,79 @@ void numberLoops3() {
 }
 
 void sentinelSum() {
+    int sum=0;
+    int input=0;
     
+    while (input != -1) {
+        cout << "Type a number: ";
+        cin >> input;
+        sum += input; 
+    }
+    cout << "Sum is " << sum;
+}
+
+void showArr(int arr[], int size)  {
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+void banish( int a1[], int size1, int a2[], int size2) {
+    
+    cout << "Array1 before banishing:"; showArr(a1, size1);
+    cout << "Array2 before banishing:"; showArr(a2, size2);
+    
+    for (int i = 0; i < size2; i++)
+    {
+        for (int j = 0; j < size1; j++)
+        {
+            cout << "\nComparing a2[" << i << "] with a1[" << j << "]" << endl;
+            if (a2[i] == a1[j]) {                                   //duplicate found. initiating Banish Protocol.
+                cout << "Duplicate found. "<<a2[i]<<"="<< a1[j]<<". Initiating banish protocol."<<endl;
+                a1[j] = 0;
+                for (int k = 1; k < size1; k++)                     //loop starts at index 1, goes all the way to the length of array
+                {   
+                    a1[k - 1] = a1[k];
+                }
+                a1[size1-1] = 0;
+                cout << "Array1 after banishing:"; showArr(a1, size1);
+            }
+        
+        }
+    }
+
+    cout << "Array1 after completion:"; showArr(a1, size1);
+    cout << "Array2 after completion:"; showArr(a2, size2);
+
+}
+
+int getLength( int arr[]) {
+    int length = sizeof(arr) / sizeof(arr[0]);
+    cout << "Entered array length: " << length<<endl;
+    return length;
 }
 
 int main()
 {
-
+    //main menu init
     int choice = 1000;
 
+    //main menu frontend
     while (choice != 0) {
-        cout << "\n==MAIN MENU==" << endl;
+        cout << "\n\n==MAIN MENU==" << endl;
         cout << "1: Fibonacci Sequence Generator\n";
         cout << "2: Mystery Exam 1\n";  
         cout << "3: Number Loop 1\n";  
         cout << "4: Number Loops 2\n";  
         cout << "5: Number Loops 3\n";  
         cout << "6: Sentinel Sum\n";  
+        cout << "7: Banish Protocol\n";  
         cout << "Select exercise number: ";
         cin >> choice;
 
+        //main menu backend
         switch (choice) {
 
             case 1: 
@@ -148,23 +202,50 @@ int main()
                 int returnee = loopMysteryExam1(i, j);
                 cout << "Return: " << returnee;
             }
-
             case 3:
-            {//rough work
+            {
                 numberLoops1();
             }
-
             case 4:
-            {//rough work
+            {
                 numberLoops2();
             }
             case 5:
-            {//rough work
+            {
                 numberLoops3();
             }
             case 6:
-            {//rough work
-                sentinelSum();
+            {//sentinel sum
+                int sum = 0;
+                int input = 0;
+
+
+
+                while (input != -1) {
+                    std::cout << "Type a number: ";
+                    std::cin >> input;
+                    if (input != -1)
+                        sum = sum + input;
+                    else
+                        break;
+                }
+                cout << "Sum is " << sum;
+            }
+            case 7:
+            {
+                int a1[] = { 42,3,9,42,42,0,42,9,42,42,17,8,2222,4,9,0,1 };
+                int a2[] = { 42,2222,9 };
+
+                int size1 =  sizeof(a1) / sizeof(a1[0]);
+                int size2 =  sizeof(a2) / sizeof(a2[0]);
+
+                banish(
+                    a1, size1,
+                    a2, size2
+                );
+
+                
+                
             }
         }
 
