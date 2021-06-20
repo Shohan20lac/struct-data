@@ -2,10 +2,61 @@
 //
 
 #include <iostream>
+using namespace std;
+
+void ageCount() {
+    int age = 0;
+
+    cout << "age:" << endl;
+    cin >> age;
+
+    if (age < 30)
+        cout << "Young" << endl;
+    else if (age < 60)
+        cout << "Middle Aged" << endl;
+
+    if (age < 100)
+        cout << "Old people";
+    else
+        cout << "Very old People" << endl;
+}
+
+void ageCount1() {
+    int age = 0;
+
+    cout << "age:" << endl;
+    cin >> age;
+
+    if (age < 30)
+        cout << "Young" << endl;
+    else if (age < 60)
+        cout << "Middle Aged" << endl;
+
+    else if (age < 100)
+        cout << "Old people";
+    else
+        cout << "Very old People" << endl;
+}
+
+void reverseNum( int x) {
+    x = 456;
+
+    while (x != 0) {
+        cout << x % 10 << endl; //displays the last element of the int
+        x = x / 10;
+    }
+
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
+    
+    //where there's else, there is exclusive conditioning.
+    
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

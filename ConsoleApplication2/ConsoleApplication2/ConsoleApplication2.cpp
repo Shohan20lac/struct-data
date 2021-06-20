@@ -131,30 +131,29 @@ void showArr(int arr[], int size)  {
 
 void banish( int a1[], int size1, int a2[], int size2) {
     
-    cout << "Array1 before banishing:"; showArr(a1, size1);
-    cout << "Array2 before banishing:"; showArr(a2, size2);
-    
-    for (int i = 0; i < size2; i++)
-    {
+    cout << "Array1 before banishing:"; showArr(a1, size1); cout << endl;
+    cout << "Array2 before banishing:"; showArr(a2, size2); cout << endl;
+
+    for (int i = 0; i < size2; i++){
+
         for (int j = 0; j < size1; j++)
         {
-            cout << "\nComparing a2[" << i << "] with a1[" << j << "]" << endl;
-            if (a2[i] == a1[j]) {                                   //duplicate found. initiating Banish Protocol.
-                cout << "Duplicate found. "<<a2[i]<<"="<< a1[j]<<". Initiating banish protocol."<<endl;
-                a1[j] = 0;
-                for (int k = 1; k < size1; k++)                     //loop starts at index 1, goes all the way to the length of array
-                {   
-                    a1[k - 1] = a1[k];
+            if (a2[i] == a1[j]) {   
+                //duplicate found. initiate banish protocol.
+                for (int k = j; k < size1; k++){
+                    a1[k] = a1[k + 1];
+                    cout << "a1" << (k + 1) << "] moved to a1[" << (k) << "]\n";
                 }
-                a1[size1-1] = 0;
-                cout << "Array1 after banishing:"; showArr(a1, size1);
+                a1[ (size1 - 1) ] = 0;                
+                j--;
             }
-        
         }
+
     }
 
-    cout << "Array1 after completion:"; showArr(a1, size1);
-    cout << "Array2 after completion:"; showArr(a2, size2);
+
+    cout << "Array1 after completion:"; showArr(a1, size1); cout << endl;
+    cout << "Array2 after completion:"; showArr(a2, size2); cout << endl;
 
 }
 
@@ -163,6 +162,44 @@ int getLength( int arr[]) {
     cout << "Entered array length: " << length<<endl;
     return length;
 }
+
+void collapsePairs( int a[], int size) {
+
+
+    for (int i = 0; i < size; i+=2)
+    {
+        //get sum of pair
+        int sum = 0;
+        for (int j = 0; j < 2; j++) 
+        {
+            if (j == 0)         //if we're at the first element of the pair
+                sum = a[i];         //add first number of pair to sub-sum
+            else
+                sum = a[i + 1]; //else, add second number of pair to sub-sum
+        }
+
+        //put sum value in right location
+        if (sum%2==0) { 
+            a[i] = 0; a[i + 1] = sum;
+        }
+        else {
+            a[i] = sum; a[i + 1] = 0;
+        }
+            
+    }
+}
+
+int computeAverage( int arr[], int size) {
+    int sum;
+    for (int i = 0; i < size; i++)
+    {
+        sum += arr[i];
+    }
+    return sum / size; 
+}
+
+
+
 
 int main()
 {
@@ -179,6 +216,9 @@ int main()
         cout << "5: Number Loops 3\n";  
         cout << "6: Sentinel Sum\n";  
         cout << "7: Banish Protocol\n";  
+        cout << "8: Collapse Pairs(incomplete)\n";  
+        cout << "9: Compute Average(incomplete)\n";
+        cout << "10: Get Percent Even\n";
         cout << "Select exercise number: ";
         cin >> choice;
 
@@ -243,9 +283,21 @@ int main()
                     a1, size1,
                     a2, size2
                 );
+            }
+            case 8:
+            {
+                int a[] = {7,2,8,9,4,22,7,1,9,10};
+                int size_a = sizeof(a) / sizeof(a[0]);
 
-                
-                
+                cout << "\nInitialized array before collapsing pairs: "; showArr(a,size_a);
+                collapsePairs(a, size_a);
+                cout << "\nArray after collapsing pairs: "; showArr(a, size_a);
+            }
+            case 9:
+            {
+                int a[] = { 7,2,8,9,4,22,7,1,9,10 };
+                int size_a = sizeof(a) / sizeof(a[0]);
+                computeAverage(a, size_a);
             }
         }
 
