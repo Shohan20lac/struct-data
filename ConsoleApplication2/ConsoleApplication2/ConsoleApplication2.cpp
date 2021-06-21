@@ -190,7 +190,7 @@ void collapsePairs( int a[], int size) {
 }
 
 int computeAverage( int arr[], int size) {
-    int sum;
+    int sum=0;
     for (int i = 0; i < size; i++)
     {
         sum += arr[i];
@@ -198,6 +198,189 @@ int computeAverage( int arr[], int size) {
     return sum / size; 
 }
 
+float getPercentEven(int arr[], int size) {
+    float evencount = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if ( arr[i]!=NULL && arr[i] % 2 == 0 )
+            evencount +=1;
+    }
+    cout << evencount << " even numbers found in this array.";
+    if (evencount == 0) 
+        return evencount;
+    else
+        return ((evencount / size) * 100);
+}
+
+void swap( int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int* mirror( int arr[], int size) {
+    for (int i = 0; i < size/2; i++)
+    {
+        swap(arr[i], arr[(size - i)]);
+    }    
+    return arr;
+}
+
+bool hasMirrorTwice( int a1[], int size1, int a2[], int size2) {
+    bool containsDuplicate = false;
+    bool hasMirror = false;
+    int hasMirrorCount = 0;
+
+    for (int i = 0; i < size1; i++) //traverse a1 for size1 number of times.
+    {
+        if (a1[i] == a2[(size2-1)]) {   //potential mirror match found. Check if it matches all the way.
+            containsDuplicate = true;
+            int d1 = i;
+            int d2 = (size2 - 1);
+
+            while ( containsDuplicate 
+                    && d1<size1 
+                    && d2>=0
+                ) {
+                if (a1[d1] == a2[d2])
+                    containsDuplicate = true;
+                else
+                    containsDuplicate = false;
+
+                d1++; 
+                d2--;
+                    
+
+            }
+
+            
+
+            if (i == (size2-1) && containsDuplicate)
+                hasMirror = true;
+
+
+        }
+    }
+
+    if (hasMirrorCount > 1)
+        return true;
+    else
+        return false;
+
+}
+
+
+int indexOf(int arr[], int length, int target) {
+    bool found = 0;
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == target)
+            return i;
+    }
+    return -1;
+}
+
+int longestSortedSequence(int a[], int length) {
+   //init
+    int count = 0;
+    int maxcount = 0;
+
+    //sliding window approach
+    int L = 0;
+    int R = 0;
+
+    for (L; L < length; L++) {
+        R = L + 1;
+
+        bool isNonDescending = (a[R] >= a[(R - 1)]);
+        while (isNonDescending && R < length) {
+            cout << "While loop entered";
+            R++;
+            count = R - L;
+            cout << "\ncount = " << count;
+        }
+
+        if (count > maxcount)
+            maxcount = count;
+
+
+    }
+    
+    if (maxcount == 1) 
+        return 0;
+    else
+        return maxcount;
+
+}
+
+int maxValue(int arr[], int length) {
+    int maxval = arr[0];
+    for (int i = 0; i < length; i++) {
+
+
+        if (arr[i] > maxval) {
+            maxval = arr[i];
+        }
+    }
+
+    return maxval;
+}
+
+void mystery1( int a1[], int length1, int a2[], int length2) {
+    for (int i = 0; i < length1; i++){
+        a1[i] += a2[length2 - i - 1];
+    }
+}
+
+void mystery2( int a[], int length) {
+    for (int i = 1; i < length-1; i++) {
+        a[i] = a[i - 1] - a[i] + a[i + 1];
+    }
+}
+
+int numUnique( int arr[], int length) {
+    int uValue = arr[0];
+    int counter;
+    if (uValue == 0)
+        counter = 0;
+    else
+        counter = 1;
+
+    for (int i = 1; i < length; i++)
+    {
+        if (arr[i] == uValue)
+            continue;
+        else{
+            uValue = arr[i];
+            counter++;
+        }
+    }
+    return counter;
+}
+
+void removePalindromes(string a[], int length) {
+
+
+
+ 
+
+    for (string str : a) {
+        cout << "The length of this string is:" << str[0].length() << endl;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//------------MAIN------------------//
 
 
 
@@ -210,22 +393,30 @@ int main()
     while (choice != 0) {
         cout << "\n\n==MAIN MENU==" << endl;
         cout << "1: Fibonacci Sequence Generator\n";
-        cout << "2: Mystery Exam 1\n";  
-        cout << "3: Number Loop 1\n";  
-        cout << "4: Number Loops 2\n";  
-        cout << "5: Number Loops 3\n";  
-        cout << "6: Sentinel Sum\n";  
-        cout << "7: Banish Protocol\n";  
-        cout << "8: Collapse Pairs(incomplete)\n";  
+        cout << "2: Mystery Exam 1\n";
+        cout << "3: Number Loop 1\n";
+        cout << "4: Number Loops 2\n";
+        cout << "5: Number Loops 3\n";
+        cout << "6: Sentinel Sum\n";
+        cout << "7: Banish Protocol\n";
+        cout << "8: Collapse Pairs(incomplete)\n";
         cout << "9: Compute Average(incomplete)\n";
         cout << "10: Get Percent Even\n";
+        cout << "11: Has Mirror Twice\n";
+        cout << "12: IndexOf\n";
+        cout << "13: Longest Sorted non-decreasing sequence\n";
+        cout << "14: maxValue\n";
+        cout << "15: Mystery1\n";
+        cout << "16: Mystery2\n";
+        cout << "17: Number of unique digits\n";
+        cout << "18: Remove Palindrome\n";
         cout << "Select exercise number: ";
         cin >> choice;
 
         //main menu backend
         switch (choice) {
 
-            case 1: 
+            case 1:
             { //fibonacci
                 int limit;
                 cout << "Enter limit for fibonacci series:";
@@ -233,10 +424,10 @@ int main()
                 fibonacci(limit);
                 cout << "\nFunction completed successfully. Returning to main menu.\n\n";
             }break;
-            
-            case 2: 
+
+            case 2:
             {//loopMysterExam1
-                int i,j;
+                int i, j;
                 cout << "Enter i: "; cin >> i;
                 cout << "\nEnter j: "; cin >> j;
                 int returnee = loopMysteryExam1(i, j);
@@ -276,8 +467,8 @@ int main()
                 int a1[] = { 42,3,9,42,42,0,42,9,42,42,17,8,2222,4,9,0,1 };
                 int a2[] = { 42,2222,9 };
 
-                int size1 =  sizeof(a1) / sizeof(a1[0]);
-                int size2 =  sizeof(a2) / sizeof(a2[0]);
+                int size1 = sizeof(a1) / sizeof(a1[0]);
+                int size2 = sizeof(a2) / sizeof(a2[0]);
 
                 banish(
                     a1, size1,
@@ -286,26 +477,132 @@ int main()
             }
             case 8:
             {
-                int a[] = {7,2,8,9,4,22,7,1,9,10};
+                int a[] = { 7,2,8,9,4,22,7,1,9,10 };
                 int size_a = sizeof(a) / sizeof(a[0]);
 
-                cout << "\nInitialized array before collapsing pairs: "; showArr(a,size_a);
+                cout << "\nInitialized array before collapsing pairs: "; showArr(a, size_a);
                 collapsePairs(a, size_a);
                 cout << "\nArray after collapsing pairs: "; showArr(a, size_a);
             }
-            case 9:
+            case 9://computeAverage
             {
                 int a[] = { 7,2,8,9,4,22,7,1,9,10 };
                 int size_a = sizeof(a) / sizeof(a[0]);
                 computeAverage(a, size_a);
             }
+            case 10://percentageEven
+            {
+                int a[] = { 7,2,8,9,4,22,7,1,9,10 };
+                int size_a = sizeof(a) / sizeof(a[0]);
+                cout << "\nTaking array:"; showArr(a, size_a);
+                cout << "\nPercentage of even numbers in this array: " << getPercentEven(a, size_a);
+            }
+            case 11://hasMirrorTwice
+            {
+                int a1[] = { 6, 1, 2, 1, 3, 1, 3, 2, 1, 5 };
+                int size_a1 = sizeof(a1) / sizeof(a1[0]);
+                cout << "\nInitialized array: "; showArr(a1, size_a1);
+
+                int a2[] = { 1, 2 };
+                int size_a2 = sizeof(a2) / sizeof(a2[0]);
+                cout << "\nInitialized array: "; showArr(a2, size_a2);
+
+                cout << "\nCheck to see if a1 contains all consecutive elements of a2 twice: ";
+                cout << hasMirrorTwice(a1, size_a1, a2, size_a2);
+            }
+            case 12://index of
+            {
+                int a1[] = { 6, 1, 2, 1, 3, 1, 3, 2, 1, 5 };
+                int size_a1 = sizeof(a1) / sizeof(a1[0]);
+                cout << "\nInitialized array: "; showArr(a1, size_a1);
+
+                int target;
+                cout << "\nEnter target value:";
+                cin >> target;
+
+                cout << "Index of target value is: " << indexOf(a1, size_a1, target);
+
+            }
+            case 13: //longestSortedSequence
+            {
+                int a1[] = { 6, 1, 2, 1, 3, 1, 3, 2, 1, 5 };
+                int size_a1 = sizeof(a1) / sizeof(a1[0]);
+                cout << "\nInitialized array: "; showArr(a1, size_a1);
+                int result = longestSortedSequence(a1, size_a1);
+            }
+            case 14: //maxValue
+            {
+                int a1[] = { 6, 1, 2, 1, 3, 1, 3, 2, 1, 5 };
+                int size_a1 = sizeof(a1) / sizeof(a1[0]);
+
+                cout << "Max value: " << maxValue(a1, size_a1);
+                
+            }
+            case 15:    //mystery1
+            {
+                int a1[] = { 1,3,5,7,9 };
+                int size_a1 = sizeof(a1) / sizeof(a1[0]);
+
+                int a2[] = { 1,4,9,16,25 };
+                int size_a2 = sizeof(a2) / sizeof(a2[0]);
+
+                mystery1(a1, size_a1, a2, size_a2);
+
+                showArr(a1, size_a1);
+
+            }
+            case 16:    //mystery2
+            {
+                int a1[] = { 42, 42 };
+                int size_a1 = sizeof(a1) / sizeof(a1[0]);
+                mystery2(a1, 2);
+                showArr(a1, size_a1);
+
+                int a2[] = { 6, 2, 4 };
+                int size_a2 = sizeof(a2) / sizeof(a2[0]);
+                mystery2(a2, 3);
+                showArr(a2, size_a2);
+
+                int a3[] = { 7, 7, 3, 8, 2 };
+                int size_a3 = sizeof(a3) / sizeof(a3[0]);
+                mystery2(a3, 5);
+                showArr(a3, size_a3);
+
+                int a4[] = { 4, 2, 3, 1, 2, 5 };
+                int size_a4 = sizeof(a4) / sizeof(a4[0]);
+                mystery2(a4, 6);
+                showArr(a4, size_a4);
+
+                int a5[] = { 6, 0, -1, 3, 5, 0, -3 };
+                int size_a5 = sizeof(a5) / sizeof(a5[0]);
+                mystery2(a5, 7);
+                showArr(a5, size_a5);
+            }
+
+            case 17:    //numUnique
+            {
+                int a5[] = { 6, 0, -1, 3, 5, 0, -3 };
+                int size_a5 = sizeof(a5) / sizeof(a5[0]);
+
+                cout << "number of unique digits in this array: " << numUnique(a5, size_a5);
+            }
+
+            case 18:    //remove plaindrome
+            {
+
+                string a[] = { "Madam", "raceCAR", "", "hi", "A", "Abba", "banana", "dog God",
+              "STOP otto POTS", "Madame", "C++", "LevEL", "staTS" };
+                int size_a = sizeof(a) / sizeof(a[0]);
+
+                removePalindromes(a, size_a);
+
+                //
+            }
         }
 
-
-
     }
-}
 
+}
 
 
 

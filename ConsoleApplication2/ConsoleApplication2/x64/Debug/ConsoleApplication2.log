@@ -1,0 +1,5 @@
+﻿  ConsoleApplication2.cpp
+E:\dev\datastructPractice_1\ConsoleApplication2\ConsoleApplication2\ConsoleApplication2.cpp(86,9): warning C4101: 'dotPos': unreferenced local variable
+E:\dev\datastructPractice_1\ConsoleApplication2\ConsoleApplication2\ConsoleApplication2.cpp(82,9): warning C4101: 'gridY': unreferenced local variable
+E:\dev\datastructPractice_1\ConsoleApplication2\ConsoleApplication2\ConsoleApplication2.cpp(81,9): warning C4101: 'gridX': unreferenced local variable
+  ConsoleApplication2.vcxproj -> E:\dev\datastructPractice_1\ConsoleApplication2\x64\Debug\ConsoleApplication2.exe
