@@ -1,2 +1,4 @@
 ﻿  HW2.cpp
+E:\dev\datastructPractice_1\ConsoleApplication2\HW2\HW2.cpp(114,6): warning C4101: 'hours_L': unreferenced local variable
+E:\dev\datastructPractice_1\ConsoleApplication2\HW2\HW2.cpp(184,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   HW2.vcxproj -> E:\dev\datastructPractice_1\ConsoleApplication2\x64\Debug\HW2.exe

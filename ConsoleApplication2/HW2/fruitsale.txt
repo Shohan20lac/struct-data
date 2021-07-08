@@ -1,0 +1,4 @@
+Fruit Price/kg Num_of_kg Num_Cust
+mango 78 50
+litchi 50 10
+jackfruit 10 100
