@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using namespace std; 
 
@@ -24,58 +25,40 @@ void myswap( string s1, string s2) {
 
 void flipLines(string filename) {
 	string line;
-	ifstream ifile(filename);		//initiates an instance of the ifstream class, which opens the file named "filename.txt".
+	ifstream infile(filename);		//initiates an instance of the ifstream class, which opens the file named "filename.txt".
 
-	int linecount = 0;
-	int wordcount;
-	string s1;
-	string s2;
+	int nlines = 0;
+	int nwords = 0;
+	string s1="";
+	string s2="";
 
-	int line_index = 0;
-
-	if (ifile.is_open()) {
-
-		while (getline(ifile, line))	//do this every line you come across.
-		{
-			cout << "Reading Line number " << line_index << endl;
-
-			wordcount = 1;
-			linecount++;
-			for (int j = 0; j < line.length(); j++)
-			{
-				if (line[j] == ' ')
-					wordcount++;
-			}
-
-			if (line_index % 2 == 0) {
-				s1 = line;
-				cout << "Even Line number " << line_index << "saved to s1." << endl;
-			}
-				
-			else {
-				s2 = line;
-				cout << "Odd Line number " << line_index << "saved to s2." << endl;
-			}
-				
-
-
-			if (line_index>0 && line_index % 2 != 0)
-			//if we're at an odd line number and at least one line has been traversed
-
-			{
-
-				string temp;
-				temp = s1;
-				s1 = s2;
-				s2 = temp;
-				cout << "Lines " << line_index-1 << " and " << line_index << " swapped." <<endl <<endl;
-			}
-			line_index++;
-
-			
-		}
-		ifile.close();
+	if (!infile.is_open()) {
+		cout << "File not found" << endl;
+		return;
 	}
+
+	while (getline(infile, line)) {	//execute this every 
+		nlines++;
+
+		if (nlines % 2 != 0) {	//even index
+			s1 = line;
+		}
+
+		if (nlines % 2 == 0) {	//odd index
+			s2 = line;
+		}
+
+		if (s2 != "" && s1 != "") {
+			cout << s2 << endl;
+			s2 = "";
+			cout << s1 << endl;
+			s1 = "";
+		}
+		else if (s2 == "")
+			cout << s2;
+	}
+
+	cout << "\nNumber of lines: " << nlines << endl;
 }
 
 void displayLines( string filename) {
@@ -89,9 +72,6 @@ void displayLines( string filename) {
 	
 
 }
-
-
-
 
 void hoursWorked(string filename) {
 	//input object
@@ -238,7 +218,6 @@ void hanoi(int count, int start, int end) {
 	cout << "";
 }
 
-
 float averageValueInFile(string infilename) {
 	ifstream infile(infilename);
 	string line;
@@ -295,7 +274,175 @@ float averageValueInFile(string infilename) {
 }
 
 void fileOut() {
-	ofstream myFile("");
+	ifstream myFile("E:/dev/datastructPractice_1/ConsoleApplication2/HW2/word2.txt");
+	//ifstream because we are inputting something from the file INto our system.
+
+	if (!myFile.is_open()) {
+		cout << "File not found" << endl;
+		return;
+	}
+
+	string line = ""; int nlines = 0;
+
+	while (getline(myFile, line)) {
+		nlines += 1;
+		cout << line << endl;
+	}
+	cout << "Number of lines: " << nlines << endl;
+
+	
+}
+
+void fileOut2() {
+	ifstream myFile("E:/dev/datastructPractice_1/ConsoleApplication2/HW2/word2.txt");
+	//ifstream because we are inputting something from the file INto our system.
+
+	if (!myFile.is_open()) {
+		cout << "File not found" << endl;
+		return;
+	}
+
+	string line = ""; int nlines = 0; int nWords=0;
+	string word = "";
+
+
+	int nwords = 0;
+	for (string line, word; getline(myFile, line); )
+	{
+		cout << "\nLine " << nlines << endl;
+		nlines++;
+
+		stringstream iss(line);
+		while (iss >> word)
+		{
+			cout << word << endl;
+			bool alpha = true;
+
+			for (char c : word)
+				if (!isalpha(c)) alpha = false;
+
+			if (alpha)
+				nwords++;
+		}
+		std::cout << "Number of words on this line: " << nwords << endl;
+	}
+
+	cout << "\nNumber of lines: " << nlines << endl;
+	cout << "\nNumber of words: " << nwords << endl;
+}
+
+int largestDigit(int n) {
+	if (n == 0);
+		return 0;
+
+	int r_lastCall = largestDigit(n/10);
+	return max (n%10, r_lastCall);
+}
+
+int getMax(int a, int b) {
+	return max(a, b);
+}
+
+void vowelStats(string filename) {
+	ifstream infile(filename);
+	string line;
+
+	int nlines = 0;
+	int charcount = 0;
+	int vowelcount = 0;
+	char vowels[5] = { 'a','e','i','o','u' };
+
+
+	while (getline(infile, line)) {
+		nlines++;
+		for (int i = 0; i < line.length(); i++)		//execute this for every char in the line string
+		{
+			charcount++;
+			if (line[i] == ' ') {	//empty space. reduce count by 1.
+				charcount--;
+
+				for (int j = 0; j < 5; j++) {	//compare this char with each vowel
+					if (line[i] == vowels[j]) {
+						cout << "Vowel found!" << endl;
+						vowelcount++;
+						break;
+					}
+				}
+
+			}
+			cout << "Line "<< nlines << "has " << charcount << " chars and " << vowelcount << " vowels" << endl;
+			charcount = 0; vowelcount = 0;
+		}
+
+	}
+}
+
+int parameterMystery1(int a, int b, int* c) {
+	b++;
+	a += *c;
+	cout << b << " " << *c << " " << a << " " << c << endl;
+	c = &a;
+	return a - b;
+}
+
+int parameterMystery4(int& a, int* b, int c){
+	a--;
+	c = c * 2;
+	cout << c << " " << a << " " << *b << endl;
+	(*b)++;
+	return a + c;
+}
+
+int parameterMystery9(int* b, int& c, int a) {
+	(*b)++;
+	c += 3;
+	a += 5;
+	cout << c << " " << a << " " << *b << " " << endl;
+	return a;
+}
+
+string* parameterMystery2X(string& s1, string s2) {
+	s1 += "1";
+	s2 += "2";
+	cout << s2 << " -- " << s1 << endl;
+	s1 += "!!!";
+	return &s1;
+}
+
+int mystery(int* a, int b, int& c) {
+	c++;
+	b--;
+	*a = (c + b);
+	cout << *a << " " << b << " " << c << endl;
+	return b;
+}
+
+float fileSum(string filename) {
+	float sum=0;
+	int linenum = 0;
+	string line;
+	string word;
+
+	ifstream infile(filename);
+
+	while (getline(infile, line)) {
+
+		linenum++;
+		cout << "Reading line " << linenum << endl;
+
+		stringstream ss(line);
+
+		while (ss >> word) {
+			float addition = stof(word);
+			sum = sum + addition;
+			cout << sum << endl;
+		}
+	}
+	return sum;
+}
+
+void reverseLines( ifstream infile ) {
+	
 }
 
 int main()
@@ -316,7 +463,7 @@ int main()
 		cout << "6: Recursion Mystery2\n";
 		cout << "7: Recursion Mystery3\n";
 		cout << "8: printBinary\n";
-		cout << "9: reverse\n";
+		cout << "9: reverse lines\n";
 		cout << "10: reverse\n";
 		cout << "11: printRange\n";
 		cout << "12: parameterMystery1\n";
@@ -328,6 +475,10 @@ int main()
 		cout << "18: file demo\n";
 		cout << "19: word getter\n";
 		cout << "19: file out\n";
+		cout << "20: vowel stats\n";
+		cout << "21: parameter mystery 2X\n";
+		cout << "22: parameter mystery 12\n";
+		cout << "26: filesum\n";
 		cout << "Choose an option: ";
 		cin >> choice;
 
@@ -335,117 +486,189 @@ int main()
 		{
 		default:
 			break;
-			case 1:
-			{
-				string filename = "carroll.txt";
-				flipLines(filename);
-				displayLines(filename);
+		case 1:
+		{
+			string filename = "fruits.txt";
+			flipLines(filename);
 
-				cout << "hello";
-				//read from a textfile
-				//need an object from the ifstream class.
+			//read from a textfile
+			//need an object from the ifstream class.
 
-			}break;
-			case 2:
-			{
-				string filename = "hours.txt";
-				hoursWorked(filename);
-			}
-			case 3:
-			{
+		}break;
+		case 2:
+		{
+			string filename = "hours.txt";
+			hoursWorked(filename);
+		}
+		case 3:
+		{
 
-			}
-			case 4:
-			{
-				string infilename = "word.txt";
-				string outfilename = "word2.txt";
+		}
+		case 4:
+		{
+			string infilename = "word.txt";
+			string outfilename = "word2.txt";
 
-				leetSpeak(infilename, outfilename);
+			leetSpeak(infilename, outfilename);
 
-			}
-			case 5:
-			{
-				int x, y;
-				cout << "Enter x:" << endl;
-				cin >> x;
-				cout << "Enter y:" << endl;
-				cin >> y;
+		}
+		case 5:
+		{
+			int x, y;
+			cout << "Enter x:" << endl;
+			cin >> x;
+			cout << "Enter y:" << endl;
+			cin >> y;
 
-				recursionMystery1(x, y);
-			}
-			case 6:
-			{
-				int n;
-				cout << "Enter n:" << endl;
-				cin >> n;
-				recursionMystery2(n);
-			}
+			recursionMystery1(x, y);
+		}
+		case 6:
+		{
+			int n;
+			cout << "Enter n:" << endl;
+			cin >> n;
+			recursionMystery2(n);
+		}
 
-			case 7:
-			{
+		case 7:
+		{
 
-			}
-			case 8:
-			{
+		}
+		case 8:
+		{
 
-			}
-			case 9:
-			{
+		}
+		case 9:	//reverseLines
+		{
 
-			}
-			case 10:
-			{
+		}
+		case 10:
+		{
 
-			}
-			case 11:
-			{
+		}
+		case 11:
+		{
 
-			}
-			case 12:
-			{
+		}
+		case 12:	//parameterMystery1
+		{
+			int a = 4; 
+			int b = 8;
+			int c = -3;
+			int d;
 
-			}
-			case 13:
-			{
+			d = parameterMystery1(a,b,&c);
+			parameterMystery1(c, d, &b);
+			parameterMystery1(b, a, &d);
+			cout << a << " " << b << " " << c << " " << d << endl;
+			
+			return 0;
+		}
+		case 13:	//parameterMystery4
+		{
+			int a = 2;
+			int b = 5;
+			int c = -3;
+			int d;
 
-			}
-			case 14:
-			{
+			parameterMystery4(a, &b, c);
+			d = parameterMystery4(c, &a, b);
+			parameterMystery4(b, &d, a);
 
-			}
-			case 15:
-			{
+			cout << a << " " << b << " " << c << " " << d << endl;
+			return 0;
+		}
+		case 14:
+		{
 
-			}
-			case 16: //hanoi
-			{
-				hanoi(3,1,3);
-			}
-			case 17:
-			{
-				averageValueInFile("averagevalueinfile.txt");
-			}
-			case 18: //fileread
-			{
-				//read from text. Count number of lines, number of words in each line.
-				//display each line.
+		}
+		case 15:	//parameterMystery9
+		{
+			int a = 10;
+			int b = 200;
+			int c = 3000;
 
-			}
-			case 19: //fileOut 
-			{
-				fileOut();
+			parameterMystery9(&a, b, c);
+			int d = parameterMystery9(&b, c, a);
+			cout << a << " " << b << " " << c << " " << d << endl;
+			return 0;
+		}
+		case 16: //hanoi
+		{
+			hanoi(3, 1, 3);
+		}
+		case 17:
+		{
+			averageValueInFile("averagevalueinfile.txt");
+		}
+		case 18: //fileread
+		{
+			//read from text. Count number of lines, number of words in each line.
+			//display each line.
 
-			}
-			case 20: //fileout
-			{
-				//read from text file. Identify a specific variable. Edit that variable. Output it the file. 
+		}
+		case 19: //fileOut 
+		{
+			cout << endl;
+			fileOut2();
 
-			}
+		}
+		case 20: //vowelstats
+		{
+			vowelStats("vowelStats.txt");
+		}
+		case 21:
+		{
+			string s1 = "hi";
+			string s2 = "bye";
+			string s3 = "yo";
+
+			string* s4 = new string(s3);
+			string* s5 = nullptr;
+
+			parameterMystery2X(s1, s3);
+			s5 = parameterMystery2X(*s4, s2);
+			parameterMystery2X(s2, *s5);
+
+			cout << s1 << " " << s2 << " " << s3 << endl;
+			cout << s4 << " " << *s4 << " " << s5 << " " <<*s5 << endl;
+
+		}
+		case 22:
+		{
+
+		}
+		case 23:
+		{
+			int a = 1;
+			int b = 30;
+			int c = 500;
+			int* d = new int;
+
+			*d = a;
+			int* e = &b;
+
+			mystery(d, c, b);
+			b = mystery(&c, a, *e);
+
+			cout << a << " " << b << " " << c << " " << d << " " << e << endl;
+			cout << &a << " " << &b << " " << &c << " " << *d << " " << *e << endl;
+		
+			return 0;
+		}
+		
+		case 26:	//fileSum
+		{
+			cout << fileSum("integers.txt");
+		}
 
 		}
 	}
 
 }
+
+
+
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
