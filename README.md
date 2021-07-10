@@ -1,2 +1,2 @@
 # Programming Archives
- A comprehensive collection of every documented C++ exercise I have ever done.
+ A comprehensive collection of every documented C++ practice exercise I have ever done.
