@@ -445,6 +445,61 @@ void reverseLines( ifstream infile ) {
 	
 }
 
+void readFile(string filename) {
+	ifstream infile(filename);
+	string line, word;
+	int linecount=0,wordcount=0;
+
+	while (getline(infile, line)) {
+		linecount++;
+
+		stringstream ss(line);
+		while (ss >> word) {
+			wordcount++;
+		}
+	}
+	cout << linecount << " lines" << endl;
+	cout << wordcount << " words" << endl;
+} 
+
+
+void writetofile(string infilename, string outfilepath,
+				int linechoice, string edition, bool shiftdown) 
+{
+
+	ifstream infile(infilename);
+
+	ofstream outfile(outfilepath);
+	if (!outfile.is_open()) {
+		cout << "file not found" << endl;
+		return;
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+
+		outfile << "ice is cold" << endl;
+	}
+
+	return;
+}
+
+string recursionMystery6(string s) {
+	if (s.length() == 0) {
+		return s;
+	}
+	else if (s.length() % 2 == 0) {
+		string rest = s.substr(0, s.length() - 1);
+		string last = s.substr(s.length() - 1, 1);
+		return last + recursionMystery6(rest);
+	}
+	else {
+		string first = s.substr(0, 1);
+		string rest = s.substr(1);
+		return "(" + first + ")" + recursionMystery6(rest);
+	}
+}
+
 int main()
 {
 
@@ -472,13 +527,20 @@ int main()
 		cout << "15: parameterMystery9\n";
 		cout << "16: hanoi\n";
 		cout << "17: average value in file\n";
-		cout << "18: file demo\n";
+		cout << "18: read file (line and word count)\n";
 		cout << "19: word getter\n";
 		cout << "19: file out\n";
 		cout << "20: vowel stats\n";
 		cout << "21: parameter mystery 2X\n";
 		cout << "22: parameter mystery 12\n";
 		cout << "26: filesum\n";
+		cout << "27: write to file\n";
+		cout << "28: recursionMystery6\n";
+		cout << "29: quiz1 question2\n";
+		cout << "30: quiz1 question3\n";
+		cout << "31: quiz1 question4\n";
+		cout << "31: quiz1 question4\n";
+		
 		cout << "Choose an option: ";
 		cin >> choice;
 
@@ -552,16 +614,16 @@ int main()
 		}
 		case 12:	//parameterMystery1
 		{
-			int a = 4; 
+			int a = 4;
 			int b = 8;
 			int c = -3;
 			int d;
 
-			d = parameterMystery1(a,b,&c);
+			d = parameterMystery1(a, b, &c);
 			parameterMystery1(c, d, &b);
 			parameterMystery1(b, a, &d);
 			cout << a << " " << b << " " << c << " " << d << endl;
-			
+
 			return 0;
 		}
 		case 13:	//parameterMystery4
@@ -603,10 +665,9 @@ int main()
 		}
 		case 18: //fileread
 		{
-			//read from text. Count number of lines, number of words in each line.
-			//display each line.
-
-		}
+			//speed run: count the number of lines and words from carroll.txt.
+			readFile("carroll.txt");
+		} break;
 		case 19: //fileOut 
 		{
 			cout << endl;
@@ -631,7 +692,7 @@ int main()
 			parameterMystery2X(s2, *s5);
 
 			cout << s1 << " " << s2 << " " << s3 << endl;
-			cout << s4 << " " << *s4 << " " << s5 << " " <<*s5 << endl;
+			cout << s4 << " " << *s4 << " " << s5 << " " << *s5 << endl;
 
 		}
 		case 22:
@@ -653,19 +714,72 @@ int main()
 
 			cout << a << " " << b << " " << c << " " << d << " " << e << endl;
 			cout << &a << " " << &b << " " << &c << " " << *d << " " << *e << endl;
-		
+
 			return 0;
 		}
-		
+
 		case 26:	//fileSum
 		{
 			cout << fileSum("integers.txt");
 		}
+		case 27:	//write to file
+		{
+			string infilename = "lines.txt";
+			string outfilepath = "E:/dev/datastructPractice_1/ConsoleApplication2/HW2/linesout.txt";
+
+			int linechoice = 1;
+			bool shiftdown = false;
+			string edition="change";
+
+			/*
+
+			while (choice != 0) {
+
+				cout << "Enter line you want to add to: " << endl;
+				cin >> linechoice;
+
+				cout << "Add what to line " << linechoice << "?" << endl;
+				cin >> edition;
+
+				cout << "Shift lines down?" << endl;
+				cin >> shiftdown;
+			*/
+
+				writetofile(infilename, outfilepath, linechoice, edition, shiftdown);
+
+		}
+		case 29: //recursionMystery6
+		{
+			cout << recursionMystery6("hi") << endl;
+			cout << recursionMystery6("quirk") << endl;
+			cout << recursionMystery6("computer") << endl;
+		}
+
+		case 30:
+		{
+
+		}
+
+		case 31:
+		{
+
+		}
+
+
+
+
+
+
+
+
 
 		}
 	}
-
 }
+
+
+
+
 
 
 
