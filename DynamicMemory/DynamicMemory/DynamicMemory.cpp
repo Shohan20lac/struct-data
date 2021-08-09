@@ -129,7 +129,8 @@ int main()
 {
 	int choice = 1000;
 
-	while (choice != 0) {
+	while (choice != 0) 
+	{
 		cout << "1: myswap_adress\n";
 		cout << "2: adress1\n";
 		cout << "3: aliasing\n";
