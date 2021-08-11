@@ -87,39 +87,105 @@ struct node {
 };
 
 struct page {
-	int pagenum;
+	int content;
 	page* nextpage = nullptr;
 
 	page(int pn) {
-		pagenum = pn;
+		content = pn;
 	}
 };
 
+void addNode( page* &head, int num) {
+	if (head == nullptr)
+		head = new page(num);
 
-
-node* initNode(string name, int age) {
-	node* head = new node(name, age);
-	return head;
+	else {
+		page* current = head;
+		while (current->nextpage != nullptr) {			//while we havent reached the last page
+			current = current->nextpage;				//keep traversing
+		}
+		current->nextpage = new page(num);
+	}
 }
 
-void traverseAll(node* thisnode) {
-	int count = 0;
-	while (thisnode->next != nullptr) {
-		thisnode = thisnode->next;
-		cout << "\nTraversed a node " << count++ << " times." << endl;
+void showNodes( page* &head) {
+	page* current = head;
+	cout << (head->content) << endl;
+	while (current->nextpage != nullptr) {			//while we havent reached the last page
+		current = current->nextpage;				//keep traversing
+		cout << current->content << endl;
+	}
+}
+
+void editAtIndex(page* head, int i, int newcontent) {		//goes to the ith element in the linked list and changes the content to str
+	page* current = head;
+	while (i != 0) {									//until we haven't traversed the list i number of times
+		current = current->nextpage;					//keep traversing
+		i--;
+	}
+	current->content = newcontent;
+
+}
+
+void addNode2(page* &head, int mycontent) {
+	for (int i = 0; i < 5; i++)
+	{
+		editAtIndex(head, i, i * mycontent);
+	}
+	cout << "\nNode(s) added." << endl;
+}
+
+void deleteNode(page* &head, int mycontent) {		//deletes ALL nodes that contain the value mycontent.
+	
+	if (head->content == mycontent) {
+		page* trash = head;
+		head = head->nextpage;
+		cout << "Deleting page containing the value " << mycontent << endl;
+		delete trash;
+	}
+	else {
+		page* current = head;
+		while (current->nextpage != nullptr) {			//while we havent reached the last page
+			if ((current->nextpage->content) == mycontent) {
+				page* trash = current->nextpage;
+				current->nextpage = (current->nextpage->nextpage);
+				cout << "Deleting page containing the value " << mycontent << endl;
+				delete trash;
+			}
+			else {
+				current = current->nextpage;
+			}
+		}
 	}
 		
-
 }
 
-void addNode( node* n, string name, int age) {
-	node* newnode = new node(name, age);
-	n->next = newnode;
-
+void addFront(page* &head, int mycontent) {
+	page* current = new page(mycontent);
+	current->nextpage = head;
+	head = current;
 }
 
+void removeFront(page*& head) {
+	if (head == nullptr)
+		cout << "Nothing to remove: List is already empty." << endl;
 
+	page* trash = head;
+	head = head->nextpage;
+	cout << "Node with content " << trash->content << " removed from front." << endl;
+	delete trash;
+}
 
+void removeBack(page* &head) {
+
+	page* current = head;
+	while (current->nextpage != nullptr) {
+		current = current->nextpage;
+	}
+	cout << "Deleting node form back with content " << (current->content) << endl;
+	current = nullptr;
+	delete current;
+}
 
 int main()
 {
@@ -195,30 +261,30 @@ int main()
 
 			case 4:	//linked list START
 			{
-				page* ptr;
-				int pagecount = 1;
-
-				//first node
-				page* p1 = new page(pagecount); pagecount++;
-				page* head = p1;
-				ptr = head;
-				cout << "Page pumber " << ptr->pagenum << " created." << endl;
-
-				//second node
-				page* p2 = new page(pagecount); pagecount++;
-				ptr = head;
-				ptr->nextpage = p2;
-				ptr = p2;
-				cout << "Page pumber " << ptr->pagenum << " created." << endl;
-
-				//third node
-				page* p3 = new page(pagecount); pagecount++;
-				ptr = head;
-				ptr = ptr->nextpage;	//traverse once to get to second node
-				ptr->nextpage = p3;		//from second node, assign p3 as the third node and link it.
-				ptr = p3;
-				cout << "Page pumber " << ptr->pagenum << " created." << endl;
+				page* head = nullptr;
 				
+				addNode(head, 1);
+				addNode(head, 2);
+				addNode(head, 3);
+				addNode(head, 3);
+				addNode(head, 5);
+				showNodes(head);
+				
+				addNode2(head, 1000);
+				showNodes(head);
+
+				addFront(head, 99);
+				removeFront(head);
+				removeBack(head);
+				cout << endl;
+				showNodes(head);
+
+
+
+
+
+
+
 
 
 
