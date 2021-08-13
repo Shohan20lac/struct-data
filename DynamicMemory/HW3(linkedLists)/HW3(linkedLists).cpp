@@ -4,72 +4,6 @@
 
 using namespace std;
 
-
-struct Rectangle {
-	int L = 0;
-	int W = 0;
-
-	int area = 0;
-
-	Rectangle( int l, int w) {
-		L = l;
-		W = w;
-		area = L * W;
-	}
-};
-
-void setLW( Rectangle r [] , int size ) {	//randomly initiates a rectangle.
-	for (int i = 0; i < size; i++)
-	{
-		r[i].L = rand() % 100;
-		r[i].W = rand() % 100;
-		cout << "Triangle # " << i << " random L and W set." << endl;
-	}
-}
-
-void setArea(Rectangle r[], int size)
-{
-	for (int i = 0; i < size; i++)
-	{
-		r[i].area = r[i].L * r[i].W;
-		cout << "Triangle # " << i << " area set." << endl;
-	}
-}
-
-void showTriangles(Rectangle* r[], int size){
-	for (int i = 0; i < size; i++)
-	{
-		cout << "Triangle # " << i << endl;
-		cout << " area = " << r[i]->area << endl;
-
-	}
-}
-
-void makeJuice() {
-	string juice = "";
-	cout << "juice name: ";
-
-	getline(cin, juice);
-	cout << juice;
-}
-
-string getString () {
-	string str = "";
-	getline(cin, str);
-	return str;
-}
-
-int getInteger() {
-	int i = 0;
-
-	stringstream ss;
-	string str = getString();
-	ss << str;
-	
-	ss >> i;
-	return i;
-}
-
 struct node {
 	string name;
 	int age;
@@ -177,7 +111,11 @@ void removeFront(page*& head) {
 }
 
 void removeBack(page* &head) {
-
+	if (head == nullptr) {
+		cout << "Nothing to remove: List is already empty." << endl;
+		return;
+	}
+		
 	page* current = head;
 	while (current->nextpage != nullptr) {
 		current = current->nextpage;
@@ -186,6 +124,25 @@ void removeBack(page* &head) {
 	current = nullptr;
 	delete current;
 }
+
+void removeBack2(page* &p) {
+	//Remove the last element fo the list
+	if (p->nextpage == nullptr) {
+		page* trash = p;
+		p = p->nextpage;
+		delete p;
+	}
+	else {
+		page* current = p;
+		while (current->nextpage->nextpage != nullptr) {
+			current = current->nextpage;
+		}
+		page* trash = current->nextpage;
+		current->nextpage = current->nextpage->nextpage;
+		delete trash;
+	}
+}
+
 
 int main()
 {
@@ -202,13 +159,14 @@ int main()
 		//BACKEND
 		switch (choice) {
 
+			/*
 			case 40:
 			{
 				string juicename = "";
 				juicename = getString();
 				cout << juicename;
 			} break;
-
+			*/
 
 			case 1://helloworld
 			{
@@ -237,6 +195,7 @@ int main()
 
 			}
 
+			/*
 			case 3 :	//setting up and displaying the dimensions of a rectangle
 			{
 				const int rectcount = 4;
@@ -255,9 +214,10 @@ int main()
 
 
 
-				cout << "\end" << endl;
+				cout  << endl;
 
 			}break; 
+			*/
 
 			case 4:	//linked list START
 			{
@@ -270,12 +230,9 @@ int main()
 				addNode(head, 5);
 				showNodes(head);
 				
-				addNode2(head, 1000);
-				showNodes(head);
+				removeFront(head); removeFront(head);
 
-				addFront(head, 99);
-				removeFront(head);
-				removeBack(head);
+				removeBack2(head);
 				cout << endl;
 				showNodes(head);
 

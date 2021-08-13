@@ -1,0 +1,3 @@
+﻿  HW3b(LinkedListsSTART).cpp
+E:\dev\datastructPractice_1\DynamicMemory\HW3b(LinkedListsSTART)\HW3b(LinkedListsSTART).cpp(57): warning C4715: 'isSorted': not all control paths return a value
+  HW3b(LinkedListsSTART).vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\HW3b(LinkedListsSTART).exe
