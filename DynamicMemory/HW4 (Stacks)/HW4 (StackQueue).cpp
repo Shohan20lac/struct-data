@@ -14,26 +14,104 @@ void showStack( stack <char> mystack ) {
 int checkBalance( string str ) {
 	stack <char> mystack;
 	int length = str.length();
+	bool roundopen, roundclose, curlyopen, curlyclose = false;
 
-	for (int i = 0; i < length; i++){
-		mystack.push(str[i]);
-		cout << "Loaded str["<<i<<"] to the stack" << endl;
-	}
-	cout << "String {" << str << "} pushed to the stack." << endl;
-	cout << "Stack: " << endl;
-	showStack(mystack);
+	int roundcount = 0;
+	int curlycount = 0;
 
 	//one or no chars in string: balanced
-	if (length <= 1)
+	if (length == 0)
 		return -1;
 
-	//
+	for (int i = 0; i < length; i++){
+
+		roundopen = (str[i] == '(');
+		roundclose = (str[i] == ')');
+
+		
+		curlyopen = (str[i] == '{');
+		curlyclose = (str[i] == '}');
+
+		cout << "i = " << i << endl;
+		cout << curlyopen  << roundopen   << roundclose << curlyclose << endl;
+
+		if (roundopen)
+		{
+			if (length == 1) {
+				return length;
+			}
+
+			mystack.push(str[i]);
+			cout << "round bracket opened at index " << i << endl;
+			roundcount++;
+			continue;
+		}
+
+		if (curlyopen) {
+			if (length == 1) {
+				return length;
+			}
+
+			mystack.push(str[i]);
+			cout << "curly bracket opened at index " << i << endl;
+			curlycount++;
+			continue;
+		}
+
+		if (roundclose) {
+			if (roundcount < 1
+				||
+				(mystack.top() != '(')
+				) 
+			{
+
+				cout << "roudnclose imbalance found at index " << i << endl;
+				return i;
+
+				
+			}
+				
+			else 
+			{ 
+				cout << "curly bracket closed at index" << i << endl;
+				mystack.pop();
+			}
+			continue;
+		}
+
+		if (curlyclose) {
+
+			cout << "curlycount= " << curlycount << endl;
+			if ( 
+				(curlycount < 1)  
+				|| 
+				(mystack.top() != '{') 
+				) 
+			{
+				cout << "curlyclose imbalance found at index " << i << endl;
+				return i;
+				
+			}
+			else
+			{
+				cout << "curly bracket closed at index" << i << endl;
+				mystack.pop();
+			}
+			continue;
+		}
 
 
+	}
 
+	if (mystack.empty()) {
+		cout << "Balance confirmed" << endl;
+		return -1;
+	}
+	else {
+		cout << "Unbalanced" << endl;
+		return length;
+	}
 
-
-	return 0;
 }
 
 void push( char arr[], int sz, char ch, int &count ) {
@@ -67,9 +145,6 @@ char dequeue(char arr[], int sz, int &head ) {
 	head++;
 	return arr[head-1];
 }
-
-
-
 
 
 struct myStack {
@@ -120,7 +195,9 @@ char myPop(myStack* s) {
 	return ( s-> arr[s->counter] );
 }
 
+void showstack( stack <int> mystack ) {
 
+}
 
 // MAIN ======================================
 
@@ -138,7 +215,7 @@ int main()
 		{
 			case(1):	
 			{
-				string str1 = "this is a string.";
+				string str1 = "{{{{this is a string.}";
 				cout << checkBalance(str1);
 			}
 			break;
@@ -178,7 +255,6 @@ int main()
 
 			case (4):	//myStack
 			{
-				
 				myStack* s = new myStack(5);
 				int counter = s->counter;
 
@@ -188,13 +264,23 @@ int main()
 				myPush(s, 'D');
 				myPush(s, 'E');
 				myPush(s, 'F');
+			}break;
 
+			case(5) :	//collapse 
+			{
+				cout << "Hello world!";
+				stack <int> mystack;
+				mystack.push(1);
+				mystack.push(2);
+				mystack.push(3);
+				mystack.push(4);
+				mystack.push(5);
 
-
+				showstack(mystack);
 			}
 		}
 	}
 
 	
-
+	return 0;
 }

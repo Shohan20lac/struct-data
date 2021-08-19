@@ -1,2 +1,3 @@
 ﻿  HW4 (StackQueue).cpp
-  HW4 (Stacks).vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\HW4 (StackQueue).exe
+E:\dev\datastructPractice_1\DynamicMemory\HW4 (Stacks)\HW4 (StackQueue).cpp(270,37): error C2440: 'initializing': cannot convert from 'initializer list' to 'std::stack<int,std::deque<int,std::allocator<int>>>'
+E:\dev\datastructPractice_1\DynamicMemory\HW4 (Stacks)\HW4 (StackQueue).cpp(270,37): message : No constructor could take the source type, or constructor overload resolution was ambiguous
