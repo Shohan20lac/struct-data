@@ -471,6 +471,62 @@ void removeBack3(ListNode* &head) {
 	}
 }
 
+void reverse(ListNode* &head) {
+    if (head == nullptr)
+        return;
+
+    if (head->next == nullptr) { //one node only
+        return;
+    }
+
+    if (head->next->next == nullptr) //two nodes only
+    {
+        ListNode* prev = head;
+        ListNode* curr = head->next;
+        prev->next = nullptr;
+        curr->next = prev;
+        head = curr;
+        return;
+    }
+
+    if (head->next->next->next == nullptr) //three nodes only
+    {
+        ListNode* prev = head;
+        ListNode* current = prev->next;
+        ListNode* after = current->next;
+        prev->next = nullptr;
+
+        current->next = prev;
+        after->next = current;
+        head = after;
+        return;
+    }
+    else {  //more than three nodes
+        ListNode* prev = head;
+        ListNode* current = prev->next;
+        ListNode* after = current->next;
+        prev->next = nullptr;
+
+        while (after != nullptr) {
+
+            if (after->next == nullptr)    //last three nodes reached; time to pack up and finish
+            {
+                current->next = prev;
+                after->next = current;
+                head = after;
+                after = nullptr;
+            }
+            else {
+                current->next = prev;
+                prev = current;
+                current = after;
+                after = after->next;
+            }
+        }
+    }
+    
+}
+
 int main()
 {
     //add every element of one linked list to another linked list
@@ -488,15 +544,18 @@ int main()
     addNode(front2, 8);
     addNode(front2, 66);
     addNode(front2, 55);
-
-    linkedListMystery11(front1, front2);
     cout << endl;
 
-    showNodes2(front1);
+    ListNode* front3 = nullptr;
+    addNode(front3, 1);
+    addNode(front3, 10);
+    addNode(front3, 13);
+    addNode(front3, 13);
+    showNodes2(front3);
     cout << endl;
 
-    showNodes2(front2);
-    cout << endl;
+    reverse(front3);
+    showNodes2(front3);
 
 
     /*ListNode* head6 = nullptr;

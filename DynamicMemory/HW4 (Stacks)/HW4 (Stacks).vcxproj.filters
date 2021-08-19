@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HW4 (Stacks).cpp">
+    <ClCompile Include="HW4 %28StackQueue%29.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
