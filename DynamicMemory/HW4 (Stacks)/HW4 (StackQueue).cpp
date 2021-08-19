@@ -59,6 +59,7 @@ void enqueue( char arr[] , int sz, char ch , int &tail ) {
 		return;
 	}
 	arr[tail] = ch;
+	cout << "enqueued " << arr[tail] << endl;
 	tail++;
 }
 
@@ -67,13 +68,70 @@ char dequeue(char arr[], int sz, int &head ) {
 	return arr[head-1];
 }
 
+
+
+
+
+struct myStack {
+	int counter = 0;
+	int size = 0;
+
+	char* arr = nullptr;
+	
+	myStack(int s) {
+		size = s;
+		arr = new char[size];
+		for (int i = 0; i < size; ++i)
+		{
+			arr[i] = ' ';
+		}
+	}
+};
+
+void enlarge(myStack* s){
+	s->size = (s->size * 2);
+
+	char* newArr = new char(s->size);
+	for (int i = 0; i < (s->size) ; ++i)
+	{
+		newArr[i] = ' ';
+
+	}
+	cout << "enlarged" << endl;
+	for (int  i = 0;	i < (s->size / 2);	++i)
+	{
+		newArr[i] = s->arr[i];
+	}
+	s->arr = newArr;
+}
+
+void myPush(myStack* s, char ch) {
+	if (s->counter >= s->size) {
+		cout << "stack overflow! enlarging..." << endl;
+		enlarge(s);
+	}
+
+	s->arr[s->counter] = ch;
+	s->counter++;
+}
+
+char myPop(myStack* s) {
+	s->counter--;
+	return ( s-> arr[s->counter] );
+}
+
+
+
+// MAIN ======================================
+
+
 int main()
 {
 	
 	int choice = 1000;
 
 	while (choice != 0) {
-		cout << "\nSelect choice: " << endl;
+		cout << "\n\n\nSelect choice: " << endl;
 		cin >> choice;
 
 		switch (choice)
@@ -109,15 +167,31 @@ int main()
 				enqueue(arr, sz, 'B', tail);
 				enqueue(arr, sz, 'C', tail);
 				enqueue(arr, sz, 'D', tail);
-				enqueue(arr, sz, 'E', head);
+				enqueue(arr, sz, 'E', tail);
 
-				cout << arr[head]; 
+				cout << dequeue(arr, sz, head);
+				cout << dequeue(arr, sz, head);
+				cout << dequeue(arr, sz, head);
+				cout << dequeue(arr, sz, head);
+				cout << dequeue(arr, sz, head);
+			}break;
+
+			case (4):	//myStack
+			{
 				
+				myStack* s = new myStack(5);
+				int counter = s->counter;
+
+				myPush(s, 'A');
+				myPush(s, 'B');
+				myPush(s, 'C');
+				myPush(s, 'D');
+				myPush(s, 'E');
+				myPush(s, 'F');
+
+
+
 			}
-
-
-			default:
-				break;
 		}
 	}
 
