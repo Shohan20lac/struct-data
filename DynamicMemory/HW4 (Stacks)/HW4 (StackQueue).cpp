@@ -226,7 +226,7 @@ void collapse(stack <int>& mystack) {
 
 }
 
-bool isPalindrome( queue <int> q ) {
+bool isPalindrome(queue <int> q) {
 	stack <int> mystack;
 	int size = q.size();
 	if (size <= 2)
@@ -236,7 +236,7 @@ bool isPalindrome( queue <int> q ) {
 
 	if (!sizeEven)	//if odd number of elements
 	{
-		for (int i = 0; i < size/2; i++)
+		for (int i = 0; i < size / 2; i++)
 		{
 			mystack.push(q.front());
 			q.pop();
@@ -245,7 +245,7 @@ bool isPalindrome( queue <int> q ) {
 		//middle element. Do nothing and...
 		q.pop();
 
-		for (int i = ((size/2)+1); i < size; i++)
+		for (int i = ((size / 2) + 1); i < size; i++)
 		{
 			if (q.front() == mystack.top()) {
 				q.pop();
@@ -255,15 +255,33 @@ bool isPalindrome( queue <int> q ) {
 				return false;
 			}
 		}
-
+		//if came this far, then...
 		return true;
 	}
-	else
+
+	else           //if even number of elements
 	{
-		//if even number of elements
-		return false;
+
+		for (int i = 0; i <= size / 2; i++) {
+			mystack.push(q.front());
+			q.pop();
+		}
+
+		for (int i = (size / 2) + 1; i < size; i++) {
+			if (mystack.top() == q.front()) {
+				mystack.pop();
+				q.pop();
+			}
+		}
+		//if came this far, then...
+		return true;
+
+
 
 	}
+
+
+
 }
 
 void collectionMystery6( stack <int> &s) {
@@ -296,6 +314,34 @@ void collectionMystery6( stack <int> &s) {
 	showstack(s);
 }
 
+
+void qStackPush ( queue <int> &q , int element ) {
+	int newsize = q.size() + 1;
+	int* arr = new int[newsize];
+
+	for (int i = 0; i < q.size(); i++){
+		arr[i] = q.front();
+		q.pop();
+	}
+
+	arr[q.size()] = element;
+
+	for (int i = 0; i < newsize; i++){
+		q.push(arr[i]);
+	}
+
+}
+
+int qStackPop (queue <int> q) {
+	queue <int> p = q;
+	q.pop();
+	return(p.back());
+}
+
+
+
+
+
 // MAIN ======================================
 
 
@@ -327,9 +373,7 @@ int main()
 				push(arr, sz, 'D', count);
 				cout << pop(arr, sz, count) << endl;
 
-			}
-			break;
-
+			}break;
 			case (3):	//basis queue with array
 			{
 				int head = 0;
@@ -349,7 +393,6 @@ int main()
 				cout << dequeue(arr, sz, head);
 				cout << dequeue(arr, sz, head);
 			}break;
-
 			case (4):	//myStack
 			{
 				myStack* s = new myStack(5);
@@ -374,7 +417,6 @@ int main()
 
 				collapse(mystack);
 			}break;
-
 			case (6):	// isPalindrome
 			{
 				queue <int> q;
@@ -387,7 +429,6 @@ int main()
 				cout << "Is palindrome? Ans:" << isPalindrome(q);
 
 			}
-
 			case (7):	// collectionMystery6
 			{
 				stack <int> mystack1;
@@ -424,6 +465,34 @@ int main()
 
 
 
+			}
+			case(8): // isPalindrome
+			{
+				queue <int> q;
+				q.push(3);
+				q.push(8);
+				q.push(17);
+				q.push(9);
+				q.push(4);
+				q.push(17);
+				q.push(8);
+				q.push(3);
+
+				cout << "is palindrome: " << isPalindrome(q);
+			}
+			case(9):	//stack using queue
+			{
+				queue <int> q;
+				q.push(30);
+				q.push(10);
+				q.push(50);
+				q.push(20);
+				q.push(40);
+				q.push(60);
+
+				qStackPush( q,80 );
+
+				qStackPop( q );
 			}
 		}
 	}
