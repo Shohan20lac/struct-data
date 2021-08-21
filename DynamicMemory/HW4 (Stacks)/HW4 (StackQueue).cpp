@@ -315,27 +315,52 @@ void collectionMystery6( stack <int> &s) {
 }
 
 
-void qStackPush ( queue <int> &q , int element ) {
-	int newsize = q.size() + 1;
-	int* arr = new int[newsize];
+void qStackPush(queue <int>& q, int element) {
+	int size = q.size();
+	int newsize = size + 1;
 
-	for (int i = 0; i < q.size(); i++){
-		arr[i] = q.front();
+	int* temp = new int[newsize];
+
+	if (size == 0) {
+		q.push(element);
+	}
+
+	for (int i = 0; i < newsize - 1; i++) {
+		temp[i] = q.front();
 		q.pop();
 	}
 
-	arr[q.size()] = element;
+	temp[newsize - 1] = element;
 
-	for (int i = 0; i < newsize; i++){
-		q.push(arr[i]);
+	for (int i = 0; i < newsize; i++) {
+		q.push(temp[i]);
 	}
 
 }
 
-int qStackPop (queue <int> q) {
-	queue <int> p = q;
+
+int pop(queue <int>& q) {
+	int size = q.size();
+	int newsize = size - 1;
+
+	int* temp = new int[newsize];
+
+	for (int i = 0; i < newsize; i++) {
+		temp[i] = q.front();
+		q.pop();
+	}
+	int popval = q.front();
 	q.pop();
-	return(p.back());
+
+	for (int i = 0; i < newsize; i++) {
+		q.push(temp[i]);
+	}
+
+	return popval;
+}
+
+int qStackPop (queue <int> q) {
+	return q.front();
 }
 
 void reorder(queue <int>& q) {
@@ -537,12 +562,6 @@ int main()
 				mystack3.push(55);
 				mystack3.push(6);
 				mystack3.push(1);
-
-				
-
-
-
-
 			}
 			case(8): // isPalindrome
 			{
