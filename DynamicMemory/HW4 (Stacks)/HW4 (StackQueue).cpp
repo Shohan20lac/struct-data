@@ -372,17 +372,35 @@ void reorder(queue <int>& q) {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
+void shift ( stack <int> &mystack , int n ){    
+    int m = mystack.size();
+    if (m<=1)
+        return;
+    
+    int diff = m-n;
+    
+    stack <int> unchangedStack;
+    for (int i = 0; i< diff; i++){
+        unchangedStack.push( mystack.top() );
+        mystack.pop();
+    }
+    
+    queue <int> shiftedQ;
+    for ( int i=0; i<n; i++ ){
+        shiftedQ.push ( mystack.top() );
+        mystack.pop();
+    }
+    
+    while (!unchangedStack.empty()){
+        mystack.push ( unchangedStack.top() );
+        unchangedStack.pop();
+    }
+    
+    while (!shiftedQ.empty()){
+        mystack.push ( shiftedQ.front() );
+        shiftedQ.pop();
+    }
+}
 
 
 
