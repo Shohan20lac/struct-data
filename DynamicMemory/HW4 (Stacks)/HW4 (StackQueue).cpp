@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <string> 
+#include <queue>
 
 using namespace std;
 
@@ -196,7 +197,103 @@ char myPop(myStack* s) {
 }
 
 void showstack( stack <int> mystack ) {
+	while (!mystack.empty()) {
+		cout << mystack.top() << endl;
+		mystack.pop();
+	}
+}
 
+void collapse(stack <int>& mystack) {
+	int size = mystack.size();
+	int* arr = new int[size];
+
+	int last;
+
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = mystack.top();
+		mystack.pop();
+	}
+
+	for (int i = 0; i < size; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << "linebreak" << endl;
+
+	for (int i = size - 1; i >= 0; i -= 2) {
+		mystack.push(arr[i] + arr[i - 1]);
+	}
+
+}
+
+bool isPalindrome( queue <int> q ) {
+	stack <int> mystack;
+	int size = q.size();
+	if (size <= 2)
+		return true;
+
+	bool sizeEven = (size % 2 == 0);
+
+	if (!sizeEven)	//if odd number of elements
+	{
+		for (int i = 0; i < size/2; i++)
+		{
+			mystack.push(q.front());
+			q.pop();
+		}
+
+		//middle element. Do nothing and...
+		q.pop();
+
+		for (int i = ((size/2)+1); i < size; i++)
+		{
+			if (q.front() == mystack.top()) {
+				q.pop();
+				mystack.pop();
+			}
+			else {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	else
+	{
+		//if even number of elements
+		return false;
+
+	}
+}
+
+void collectionMystery6( stack <int> &s) {
+	queue <int> q;
+	stack <int> s2;
+
+	while (!s.empty()) {
+		if (s.top() % 2 == 0) {
+			q.push( s.top() );
+			s.pop();
+		}
+		else
+		{
+			s2.push(s.top());
+			s.pop();
+		}
+	}
+
+	while (!q.empty())
+	{
+		s.push(q.front());
+		q.pop();
+	}
+	while (!s2.empty())
+	{
+		s.push(s2.top());
+		s2.pop();
+	}
+	cout << "Output: " << endl;
+	showstack(s);
 }
 
 // MAIN ======================================
@@ -268,7 +365,6 @@ int main()
 
 			case(5) :	//collapse 
 			{
-				cout << "Hello world!";
 				stack <int> mystack;
 				mystack.push(1);
 				mystack.push(2);
@@ -276,7 +372,58 @@ int main()
 				mystack.push(4);
 				mystack.push(5);
 
-				showstack(mystack);
+				collapse(mystack);
+			}break;
+
+			case (6):	// isPalindrome
+			{
+				queue <int> q;
+				q.push(1);
+				q.push(2);
+				q.push(3);
+				q.push(2);
+				q.push(1);
+
+				cout << "Is palindrome? Ans:" << isPalindrome(q);
+
+			}
+
+			case (7):	// collectionMystery6
+			{
+				stack <int> mystack1;
+				mystack1.push(1);
+				mystack1.push(2);
+				mystack1.push(3);
+				mystack1.push(4);
+				mystack1.push(5);
+				mystack1.push(6);
+
+				stack <int> mystack2;
+				mystack2.push(43);
+				mystack2.push(3);
+				mystack2.push(12);
+				mystack2.push(15);
+				mystack2.push(9);
+				mystack2.push(71);
+				mystack2.push(88);
+
+				collectionMystery6(mystack2);
+
+				stack <int> mystack3;
+				mystack3.push(65);
+				mystack3.push(30);
+				mystack3.push(10);
+				mystack3.push(20);
+				mystack3.push(45);
+				mystack3.push(55);
+				mystack3.push(6);
+				mystack3.push(1);
+
+				
+
+
+
+
 			}
 		}
 	}
