@@ -338,6 +338,50 @@ int qStackPop (queue <int> q) {
 	return(p.back());
 }
 
+void reorder(queue <int>& q) {
+	int size = q.size();
+	if (size <= 1)
+		return;
+
+	stack <int> negstack;
+	queue <int> posQ;
+
+	while (!q.empty()) {
+
+		if (q.front() < 0) {
+			negstack.push(q.front());
+			q.pop();
+		}
+		else {
+			posQ.push(q.front());
+			q.pop();
+		}
+	}
+
+	while (!negstack.empty()) {
+		//keep getting all elements from it
+		q.push(negstack.top());
+		negstack.pop();
+	}
+
+	while (!posQ.empty()) {
+		q.push(posQ.front());
+		posQ.pop();
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
