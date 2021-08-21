@@ -402,6 +402,22 @@ void shift ( stack <int> &mystack , int n ){
     }
 }
 
+void stutter ( queue <int> &q){
+    queue <int> temp;
+    while (!q.empty()){
+        temp.push ( q.front() );
+        q.pop();
+    }
+    
+    while (!temp.empty()){
+        q.push( temp.front() );
+        q.push( temp.front() );
+        temp.pop();
+    }
+    
+}
+
+
 
 
 // MAIN ======================================
