@@ -527,134 +527,46 @@ void reverse(ListNode* &head) {
     
 }
 
-int main()
-{
-    //add every element of one linked list to another linked list
-    ListNode* front1 = nullptr;
-    addNode(front1, 2);
-    addNode(front1, 7);
-    addNode(front1, 5);
-    addNode(front1, 33);
-    cout << endl;
+void addFront( ListNode* head, int element ) {
+    ListNode* newnode = new ListNode;
+    newnode->next = head;
+    head = newnode;
+}
 
-    ListNode* front2 = nullptr;
-    addNode(front2, 1);
-    addNode(front2, 10);
-    addNode(front2, 9);
-    addNode(front2, 8);
-    addNode(front2, 66);
-    addNode(front2, 55);
-    cout << endl;
-
-    ListNode* front3 = nullptr;
-    addNode(front3, 1);
-    addNode(front3, 10);
-    addNode(front3, 13);
-    addNode(front3, 13);
-    showNodes2(front3);
-    cout << endl;
-
-    reverse(front3);
-    showNodes2(front3);
-
-
-    /*ListNode* head6 = nullptr;
-    addNode(head6, 44);
-    addNode(head6, 45);
-    //showNodes2(head6);
-
-    showNodesIndex(head6, 2);
-    cout << endl;
-
-    deleteIndex(head6, 1);
-    cout << endl;
-
-    showNodes2(head6);
-    */
-
+void addtoindex( ListNode* &head, int element, int index ) {
+    ListNode* newnode = new ListNode;
+    ListNode* current = head;
     
-
-   /* showNodes2(head7);
-    cout << endl;
-
-    linkedListMystery1(head7);
-
-    showNodes2(head7);
-
-    */
-
-
-    
-    
-    /*
-    ListNode* head1 = nullptr;
-    addNode(head1, 1);
-    addNode(head1, 10);
-    //addNode(head1, 3);
-    //addNode(head1, 4);
-    showEvenIndexes(head1);
-
-    cout << endl << endl;
-
-    ListNode* head2 = nullptr;
-    addNode(head2, 10);
-    addNode(head2, 20);
-    addNode(head2, 30);
-    addNode(head2, 40);
-    addNode(head2, 100);
-    showEvenIndexes(head2);
-
-    ListNode* head3 = nullptr;
-    addNode(head3, 10);
-
-    cout << endl << endl;
-
-    int val = 100;
-    int index = 0;
-    //cout << hasDataAtEvenIndex(head3, val, index);
-    //countDuplicates(head1);
-
-
-    cout << endl << endl;
-    int numbers[5] = {140,207,350,880,100};
-    int size = 5;
-    //cout << hasDataArray(head2, numbers, size);
-
-    // now let's check whether head2 contains any element from head1.
-
-    //countDuplicates(head2);
-
-
-    */
-
-
-    //add every element of an array to a linked list.
-
-    /*
-    int arr[5] = { 900,800,700,600,500 };
-    ListNode* head4 = nullptr;
-
-    for (int i=0; i<5; i++)
+    if (head = nullptr)   //emptylist. index irrelevant.
     {
-        if (head4 == nullptr)
-            //head = new page(num);
-        {
-            head4 = new ListNode;
-            head4->data = arr[i];
-            head4->next = nullptr;
-        }
-
-        else {
-            ListNode* current = head4;
-            while (current->next != nullptr) {			//while we havent reached the last page
-                current = current->next;				//keep traversing
-            }
-            current->next = new ListNode;
-            current->next->data = arr[i];
-            current->next->next = nullptr;
-        }
+        head = newnode;
+        return;
     }
 
-    showNodes(head4);
-    */
+    if (index == 0) {       
+        addFront(head, element);
+        return;
+    }
+
+    int i = 0;
+    while (i < index) {
+        current = current->next;
+        i++;
+    }
+    
+    newnode->next = current->next;
+    current->next = newnode;
+
+
+        
+
+
+
+}
+
+int main()
+{
+
+
+
 }
