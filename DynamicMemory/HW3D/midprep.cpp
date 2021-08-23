@@ -1,9 +1,17 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+
 using namespace std;
 
 struct ListNode {
     int data;
     ListNode* next;
+};
+
+struct Page {
+    string content;
+    Page* nextpage;
 };
 
 bool listEmpty( ListNode* head ) {
@@ -87,7 +95,17 @@ void showNodes(ListNode* head) {
     }
     cout << endl << endl;
 }
+void showNodes(Page* head) {
+    if (head == nullptr)
+        return;
 
+    Page* current = head;
+    while (current != nullptr) {
+        cout << current->content << " ";
+        current = current->nextpage;
+    }
+    cout << endl << endl;
+}
 void showAtIndex(ListNode* head, int index) {
     if (head == nullptr) {
         cout << "list is empty!" << endl;
@@ -107,7 +125,6 @@ void showAtIndex(ListNode* head, int index) {
 
     cout << endl << endl;
 }
-
 void showEvenIndexes( ListNode* head ) {
     if (listEmpty(head))
         return;
@@ -132,7 +149,6 @@ void deleteFront( ListNode* &head ) {
     delete trash;
     cout << "done" << endl;
 }
-
 void deleteBack( ListNode*& head ) {
     if (listEmpty(head))
         return;
@@ -157,7 +173,6 @@ void deleteBack( ListNode*& head ) {
     current->next = current->next->next;
     delete trash;   
 }
-
 void deleteAtIndex(ListNode*& head, int index) {
     cout << "deleting node at index " << index << "..." << endl;
     if (listEmpty(head))
@@ -180,7 +195,6 @@ void deleteAtIndex(ListNode*& head, int index) {
     current->next = current->next->next;
     delete trash;
 }
-
 void deleteOddIndexes( ListNode* &head ) {
     if ( listEmpty(head) )
         return;
@@ -212,23 +226,108 @@ void deleteOddIndexes( ListNode* &head ) {
     }
 }
 
+void openfile( string filename ) {
+    ifstream infile (filename);
+    if (!infile.is_open()) {
+        cout << "file not found" << endl;
+        return;
+    }
+}
+void printLines(string filename) {
+    ifstream infile(filename);
+    if (!infile.is_open()) {
+        cout << "file not found" << endl;
+        return;
+    }
 
+    string line;
+    while (getline(infile, line)) {
+        cout << line << endl;
+    }
+}
+
+void addPagesFromFile( Page*& head1 , string filename ) {
+    cout << "Adding all pages from file " << filename << endl;
+
+    ifstream infile(filename);
+    string line;
+
+    if (head1 == nullptr) {
+        getline(infile, line);
+        Page* newpage = new Page;
+        head1 = newpage;
+        head1->content = line;
+        head1->nextpage = nullptr;
+    }
+
+    Page* current = head1;
+
+    while (getline(infile, line)) {
+        Page* newpage = new Page;
+        newpage->content = line;
+
+        current->nextpage = newpage;
+        current = current->nextpage;
+
+        newpage->nextpage = nullptr;
+    }
+}
+
+bool hasMoreVowels(string s, int length, int vowelcount, int consonantcount) {
+    cout << "String length:" << length << endl;
+
+    if (length < 0) { 
+        //time to wrap it up and send it back down the stack.
+        if (vowelcount > consonantcount) {
+            cout << "vowelcount " << vowelcount << " is greater than consonantcount " << consonantcount << endl;
+            return true;
+        }
+        else{
+            cout << "consonantcount " << consonantcount << " is greater than vowelcount " << vowelcount << endl;
+            return false;
+        }    
+    }
+
+    //else, keep recursin'.
+    if (s[length] == 'a' || s[length] == 'e' || s[length] == 'i' || s[length] == 'o' || s[length] == 'u')
+        return true && hasMoreVowels(s, length - 1, vowelcount + 1, consonantcount);
+    else 
+        return true && hasMoreVowels(s, length - 1, vowelcount, consonantcount + 1);
+}
 
 int main()
 {
-    ListNode* head = nullptr;
-    addNode(head, 10);
-    addNode(head, 20);
-    addNode(head, 30);
-    addNode(head, 40);
-    addNode(head, 50);
-    addNode(head, 60);
-    addNode(head, 70);
-    cout << endl;
+    int choice = 1000;
 
-    deleteOddIndexes(head);
+    while (choice != 0) {
+        cout << "Enter choice:" << endl;
+        cin >> choice;
+
+        switch (choice)
+        {
+            case (1):   //hasmorevowels
+            {
+                //test string
+                string s = "stieaour";
+                cout << hasMoreVowels( s , s.length()-1 , 0 , 0 ) << endl;
+            }break;
+
+            default:
+                break;
+        }
+    }
+    /*Page* head1 = nullptr;
+    string filename = "input.txt";
+    string line;
+    addPagesFromFile(head1, filename);
+    showNodes(head1); */
+
     
-    showNodes(head);
-
 
 }
+    
+
+    
+    
+
+    
