@@ -1,0 +1,4 @@
+Customer Total Cost 	 Elements brought
+1		100		[potato]
+2		120		[pineapple]
+3		50		[potato]
