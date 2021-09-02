@@ -1,0 +1,3 @@
+﻿  DoublyLinkedLists.cpp
+E:\dev\datastructPractice_1\DynamicMemory\DoublyLinkedLists\DoublyLinkedLists.cpp(101,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  DoublyLinkedLists.vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\DoublyLinkedLists.exe

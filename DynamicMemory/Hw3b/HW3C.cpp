@@ -566,7 +566,7 @@ void addtoindex( ListNode* &head, int element, int index ) {
 
 int main()
 {
-
+    cout << "hello world!" << endl;
 
 
 }
