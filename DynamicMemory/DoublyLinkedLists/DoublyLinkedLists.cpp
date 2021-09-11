@@ -31,6 +31,7 @@ void addNode(dllnode*& head, int count ) {
     if (head == nullptr) {
         cout << "list is empty. Adding to front..." << endl;
         head = newnode;
+        head->subjectcount = count;
         head->next = nullptr;
         cout << "DONE: Added " << count << " scores to node number " << i << endl << endl;
         return;

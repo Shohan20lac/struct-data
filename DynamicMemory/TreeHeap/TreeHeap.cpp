@@ -30,5 +30,5 @@ int main(){
     insert(a, 10);
     insert(a, 20);
     insert(a, 30);
-    cout << a
+    cout << a;
 }
