@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 struct node {
@@ -258,29 +259,49 @@ int countSiblingPairs( node* a, int level, int paircount, int i ) {
     return 0;
 }
 
-
-bool levelHasSiblingPairs () {    //returns true if the nth level has at least k sibling pairs.
-    return 0;
-}
-
-void showSiblingPairs ( node* a, int n, int i, int arr []  ) {     //prints two nodes in a new line ONLY if they are siblings.
-
-    if (a == nullptr) {     //trivial base case reached
-        cout << "Found a null node at level" << i << ". Returning..." << endl;
+//prints two node values in each line ONLY if they are siblings.
+void showSiblingPairs ( node* a, int level, int i, int &count, queue <int> &q) {     
+    //base case 1: "nullptr found at the levelth level. can't go further down. Returning..."
+    if (a == nullptr && i== level) {            
+        count++;
+        q.push(0);
         return;
     }
-
-    if (i == n) {           //intended base case reached
-        cout << "Target level " << i << " reached. Printing: " << (a->data) << endl;
+    //base case 2: one child found at the levelth level. won't go further down. Returning..."
+    if (i == level) {                           
+        count++;
+        q.push(a->data);
         return;
     }
+    //case 3: queue is doubly-filled. Does it contain a sibling pair?
+    if ( count == 2 ) {     
+        
+        if ( q.front()!= 0  &&  q.back()!= 0 ) {
+            //sibling pairs found! Printing: 
 
-    //else, keep recursin'.
-    cout << "recursing left..." << endl;
-    showSiblingPairs(a->left, n, i + 1, arr);
+            cout << q.front() << " ";
+            q.pop();
 
-    cout << "recursing right..." << endl;
-    showSiblingPairs(a->right, n, i + 1, arr);
+            cout << q.front() << " ";
+            q.pop();
+
+            cout << endl;
+        }
+        else {
+            //this is not a sibling pair. Moving on...
+            q.pop();
+            q.pop();
+
+        }
+        //resetting queue member count for retasking...
+        count -= 2;
+    }
+
+    //recursing left...
+    showSiblingPairs(a->left, level, i + 1, count, q);
+    
+    //recursing right...
+    showSiblingPairs(a->right, level, i + 1, count, q);
 }
 
 
@@ -293,6 +314,16 @@ int main()
     insert(root1, 16);
     insert(root1, 12);
     insert(root1, 8);
+    insert(root1, 4);
+    
+    //SHOWING ALL SIBLING PAIRS ON THE NTH LEVEL
+    //helper queue
+    queue <int> q;
+
+    int level = 3;
+    int i = 1;
+    int count = 0;
+    showSiblingPairs(root1, level, i, count, q);
     
     /*
     //SHOWING ALL NODES AT LEVEL n; starting iteration at i=1 
@@ -330,6 +361,9 @@ int main()
     cout << findMinIterative(root1);
     cout << findMaxIterative(root1);
     */
-    int arr[8];
-    showSiblingPairs(root1, 3, 1, arr);
+    //int arr[8];
+
+
+
+
 }
