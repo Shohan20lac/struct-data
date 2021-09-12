@@ -232,14 +232,26 @@ void countleavesvoid(node* a, int& count) {
         return;
     }
 
-    
     countleavesvoid(a->left, count);
         
     countleavesvoid(a->right, count);
-    
+}
 
-    
-    
+
+int findMinIterative( node*a) {
+    while (a-> left != nullptr)
+    {
+        a = a->left;
+    }
+    return a->data;
+}
+
+int findMaxIterative( node*a) {
+    while (a->right != nullptr)
+    {
+        a = a->right;
+    }
+    return a->data;
 }
 
 int countSiblingPairs( node* a, int level, int paircount, int i ) {
@@ -251,16 +263,36 @@ bool levelHasSiblingPairs () {    //returns true if the nth level has at least k
     return 0;
 }
 
+void showSiblingPairs ( node* a, int n, int i, int arr []  ) {     //prints two nodes in a new line ONLY if they are siblings.
+
+    if (a == nullptr) {     //trivial base case reached
+        cout << "Found a null node at level" << i << ". Returning..." << endl;
+        return;
+    }
+
+    if (i == n) {           //intended base case reached
+        cout << "Target level " << i << " reached. Printing: " << (a->data) << endl;
+        return;
+    }
+
+    //else, keep recursin'.
+    cout << "recursing left..." << endl;
+    showSiblingPairs(a->left, n, i + 1, arr);
+
+    cout << "recursing right..." << endl;
+    showSiblingPairs(a->right, n, i + 1, arr);
+}
+
+
 int main()
 {
     node* root1 = nullptr;
     insert(root1, 10);
     insert(root1, 11);
     insert(root1, 5);
-    //insert(root1, 16);
+    insert(root1, 16);
     insert(root1, 12);
     insert(root1, 8);
-
     
     /*
     //SHOWING ALL NODES AT LEVEL n; starting iteration at i=1 
@@ -286,6 +318,18 @@ int main()
     cout << count;
     */
 
+
+    /*
+    //COUNTING LEAVES
     int count = 0;
-    cout << countleavesint(root1, count);
+    cout << countleavesintref(root1, count);
+    */
+
+    /*
+    //finding max and min value
+    cout << findMinIterative(root1);
+    cout << findMaxIterative(root1);
+    */
+    int arr[8];
+    showSiblingPairs(root1, 3, 1, arr);
 }
