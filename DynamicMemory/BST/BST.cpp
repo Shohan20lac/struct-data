@@ -2,20 +2,20 @@
 #include <queue>
 using namespace std;
 
-struct node {
+struct BinaryTreeNode {
     int data = 0;
-    node* left = nullptr;
-    node* right = nullptr;
+    BinaryTreeNode* left = nullptr;
+    BinaryTreeNode* right = nullptr;
 
-    node(int n) {
+    BinaryTreeNode(int n) {
         data = n;
     }
 };
 
-struct dllnode {
+struct dllBinaryTreeBinaryTreeNode {
     int data = 0;
-    dllnode* next = nullptr;
-    dllnode* prev = nullptr;
+    dllBinaryTreeBinaryTreeNode* next = nullptr;
+    dllBinaryTreeBinaryTreeNode* prev = nullptr;
     
 };
 
@@ -35,10 +35,10 @@ void printNumber(int x) {
     //what happens if you define function as &x?
 }
 
-void insert (node*& a, int x) {
-    node* current = a; 
+void insert (BinaryTreeNode*& a, int x) {
+    BinaryTreeNode* current = a; 
     if (current == nullptr) {
-        a = new node(x);
+        a = new BinaryTreeNode(x);
         return;
     }
     //else
@@ -54,7 +54,7 @@ void insert (node*& a, int x) {
     }
 }
 
-int minBST(node* a) {
+int minBST(BinaryTreeNode* a) {
     if (a == nullptr)
         return -1000;
     if (a->right == nullptr)
@@ -64,7 +64,7 @@ int minBST(node* a) {
     return minBST(a->left);
 }
 
-void remove(node*& a, int x) {
+void remove(BinaryTreeNode*& a, int x) {
     if (a == nullptr) return;
     else if (x > a->data) remove(a->right, x);
     else if (x < a->data) remove(a->left, x);
@@ -86,7 +86,7 @@ void remove(node*& a, int x) {
     }
 }
 
-void countLevelsVoid (node* a, int levelcount) {
+void countLevelsVoid (BinaryTreeNode* a, int levelcount) {
     if (a == nullptr) {
         cout << "End of list reached. level count:" << levelcount << ". Returning..." << endl;
         return;
@@ -94,7 +94,7 @@ void countLevelsVoid (node* a, int levelcount) {
 
     if (a != nullptr) {
         levelcount++;
-        cout << "Node found at level "<< levelcount <<". Value: "<< (a->data) << endl;
+        cout << "BinaryTreeNode found at level "<< levelcount <<". Value: "<< (a->data) << endl;
 
         cout << "\ntraversing left: " << endl;
         countLevelsVoid(a->left, levelcount);
@@ -111,14 +111,14 @@ void countLevelsVoid (node* a, int levelcount) {
     }
 }
 
-int countLevelsInt ( node*a , int levelcount ) {
+int countLevelsInt ( BinaryTreeNode*a , int levelcount ) {
     if (a == nullptr) {
         cout << "End of list reached. level count:" << levelcount << ". Returning..." << endl;
         return levelcount;
     }
 
     levelcount++;
-    cout << "Node found at level " << levelcount << ". Value: " << (a->data) << endl;
+    cout << "BinaryTreeNode found at level " << levelcount << ". Value: " << (a->data) << endl;
 
     int count_left = countLevelsInt(a->left, levelcount);
     int count_right = countLevelsInt(a->right, levelcount);
@@ -126,7 +126,7 @@ int countLevelsInt ( node*a , int levelcount ) {
     return max(count_left, count_right);
 }
 
-void preorder ( node* a ) {
+void preorder ( BinaryTreeNode* a ) {
     if (a == nullptr)
         return;
 
@@ -134,7 +134,7 @@ void preorder ( node* a ) {
     preorder(a->left);
     preorder(a->right);
 }
-void inorder( node* a ) {
+void inorder( BinaryTreeNode* a ) {
     if (a == nullptr)
         return;
 
@@ -142,7 +142,7 @@ void inorder( node* a ) {
     cout << a->data << " ";
     inorder(a->right);
 }
-void postorder ( node* a ) {
+void postorder ( BinaryTreeNode* a ) {
     if (a == nullptr)
         return;
 
@@ -151,10 +151,10 @@ void postorder ( node* a ) {
     cout << a->data << " ";
 }
 
-void showNthLevel( node*a, int n, int i) {
+void showNthLevel( BinaryTreeNode*a, int n, int i) {
 
     if (a == nullptr) {     //trivial base case reached
-        cout << "Leaf node exceeded past level" << i << ". Returning..." << endl;
+        cout << "Leaf BinaryTreeNode exceeded past level" << i << ". Returning..." << endl;
         return;
     }
 
@@ -168,14 +168,14 @@ void showNthLevel( node*a, int n, int i) {
     showNthLevel(a->right, n, i+1);
 }
 
-int countleavesintref( node*a, int &count) {
+int countleavesintref( BinaryTreeNode*a, int &count) {
 
     if (a == nullptr) {                                     //trivial base case
         cout << "nullpointer reached. Returning..." << endl << endl;
         return 0;
     }
 
-    cout << "Currently at node " << a << " with value " << a->data << endl;
+    cout << "Currently at BinaryTreeNode " << a << " with value " << a->data << endl;
 
     if ( a->left==nullptr  &&  a->right == nullptr ) {      //target base case 
         count++;
@@ -197,14 +197,14 @@ int countleavesintref( node*a, int &count) {
     */
 }
 
-int countleavesintval( node*a, int count) {
+int countleavesintval( BinaryTreeNode*a, int count) {
 
     if (a == nullptr) {                                     //trivial base case
         cout << "nullpointer reached. Returning..." << endl << endl;
         return 0;
     }
 
-    cout << "Currently at node " << a << " with value " << a->data << endl;
+    cout << "Currently at BinaryTreeNode " << a << " with value " << a->data << endl;
 
     if ( a->left==nullptr  &&  a->right == nullptr ) {      //target base case 
         count++;
@@ -219,7 +219,7 @@ int countleavesintval( node*a, int count) {
     );  
 }
 
-void countleavesvoid(node* a, int& count) {
+void countleavesvoid(BinaryTreeNode* a, int& count) {
     
     if (a == nullptr) {                                     //trivial base case
         cout << "nullpointer reached. Returning..." << endl;
@@ -239,7 +239,7 @@ void countleavesvoid(node* a, int& count) {
 }
 
 
-int findMinIterative( node*a) {
+int findMinIterative( BinaryTreeNode*a) {
     while (a-> left != nullptr)
     {
         a = a->left;
@@ -247,20 +247,21 @@ int findMinIterative( node*a) {
     return a->data;
 }
 
-int findMaxIterative( node*a) {
+int findMaxIterative( BinaryTreeNode*a) {
     while (a->right != nullptr)
     {
         a = a->right;
     }
+
     return a->data;
 }
 
-int countSiblingPairs( node* a, int level, int paircount, int i ) {
+int countSiblingPairs( BinaryTreeNode* a, int level, int paircount, int i ) {
     return 0;
 }
 
-//prints two node values in each line ONLY if they are siblings.
-void showSiblingPairs ( node* a, int level, int i, int &count, queue <int> &q) {     
+//prints two BinaryTreeNode values in each line ONLY if they are siblings.
+void showSiblingPairs ( BinaryTreeNode* a, int level, int i, int &count, queue <int> &q) {     
     //base case 1: "nullptr found at the levelth level. can't go further down. Returning..."
     if (a == nullptr && i== level) {            
         count++;
@@ -304,10 +305,274 @@ void showSiblingPairs ( node* a, int level, int i, int &count, queue <int> &q) {
     showSiblingPairs(a->right, level, i + 1, count, q);
 }
 
+void sumcousins(BinaryTreeNode* a, int val, int level, int i, int& count, queue <int>& q) {
+    //base case 1: "nullptr found at the levelth level. can't go further down. Returning..."
+    if (a == nullptr && i == level) {
+        count++;
+        q.push(0);
+        return;
+    }
+    //base case 2: one child found at the levelth level. won't go further down. Returning..."
+    if (i == level) {
+        count++;
+        q.push(a->data);
+        return;
+    }
+    //case 3: queue is doubly-filled. Does it contain a sibling pair?
+    if (count == 2) {
+
+        if (q.front() != 0 && q.back() != 0) {
+            //sibling pairs found! Printing: 
+
+            int front = q.front();
+            cout << q.front() << " ";
+            q.pop();
+
+            int back = q.front();
+            cout << q.front() << " ";
+            q.pop();
+
+            cout << endl;
+        }
+        else {
+            //this is not a sibling pair. Moving on...
+            q.pop();
+            q.pop();
+
+        }
+        //resetting queue member count for retasking...
+        count -= 2;
+    }
+
+    //recursing left...
+    sumcousins(a->left, val, level, i + 1, count, q);
+
+    //recursing right...
+    sumcousins(a->right, val, level, i + 1, count, q);
+
+    
+}
+
+void sumsiblings (BinaryTreeNode* a, int val, int &level, int i, int& count, queue <int>& q) {
+    //base case 1: "nullptr found at the levelth level. can't go further down. Returning..."
+    if (a == nullptr && i == level) {
+        count++;
+        q.push(0);
+        return;
+    }
+    //base case 2: one child found at the levelth level. won't go further down. Returning..."
+    if (i == level) {
+        count++;
+        q.push(a->data);
+        return;
+    }
+    //case 3: queue is doubly-filled. Does it contain a sibling pair?
+    if (count == 2) {
+        cout << "query is doubly filled! sibling pair?" << endl;
+        if (q.front() != 0 && q.back() != 0) {
+            //sibling pairs found! Printing: 
+
+            int result = q.front();
+            q.pop();
+
+            result += q.front();
+            q.pop();
+
+            cout << "printing results" << endl;
+            cout << result;
+        }
+        else {
+            //this is not a sibling pair. Moving on...
+            q.pop();
+            q.pop();
+
+        }
+        //resetting queue member count for retasking...
+        count -= 2;
+    }
+
+    //recursing left...
+    sumsiblings(a->left, val, level, i + 1, count, q);
+
+    //recursing right...
+    sumsiblings(a->right, val, level, i + 1, count, q);
+
+
+}
+
+int sumgen ( BinaryTreeNode* a, int val, int&level, int i, int &gensum ) {
+    cout << "\n\n i =" << i << ", level =" << level << endl << endl;
+    
+    if (level == 0) {   //initial target BinaryTreeNode not found yet
+        if (a->data = val)  //initial target found!
+        {
+            cout << "initial target BinaryTreeNode of value " << a->data << " found at level " << i << endl;
+            gensum = gensum + (a->data); cout << "Generation sum set to " << gensum << endl;
+            level = i;
+            cout << "level set to " << level << endl;
+        }
+
+
+
+    }
+    else {//if initial target BinaryTreeNode has already been found
+        if (a == nullptr || i > level ) return 0;
+        if (i == level) {
+            gensum = gensum + (a->data);
+            cout << "Generation sum extended to " << gensum << endl;
+        }
+    }
+    
+    cout << sumgen(a->left, val, level, i + 1, gensum);
+    cout << sumgen(a->right, val, level, i + 1, gensum);
+
+    return gensum;
+}
+
+int returnLevel(BinaryTreeNode* a, int val, int level ) {
+    if ( a == nullptr) return 0;
+
+    if (a->data == val) return level;
+    else
+        return 0;
+
+    int leftreturn = returnLevel(a->left, val , level+1);
+    int rightreturn = returnLevel(a->right, val, level+1);
+
+    return (leftreturn + rightreturn);
+}
+
+/*
+* int sumcousins(BinaryTreeNode* a, int val, int level, int cousinsum, bool levelLock) {
+    if (a == nullptr) return 0;
+
+    if (a->data == val) return level;
+    else
+        return 0;
+
+    int leftreturn = sumcousins(a->left, val, level + 1, cousinsum, levelLock);
+    int rightreturn = sumcousins(a->right, val, level + 1, cousinsum, levelLock);
+
+    return (cousinsum);
+}
+*/
+
+
+bool foundelement (BinaryTreeNode* a, int val) {
+    if (a == nullptr) return false;
+
+    if (a->data == val)
+        return true;
+    
+    if (a->data > val) 
+        return foundelement(a->left, val);    // if val < thisBinaryTreeNodeval, that's our cue to go left;
+    else
+        return foundelement(a->right, val);
+}
+
+int distanceTo( BinaryTreeNode*a , int val, int length) {  //returns the distance from root BinaryTreeNode to destination BinaryTreeNodeS
+    if (a == nullptr)
+        return 0;
+
+    if (a->data == val)
+        return length;
+
+    int leftdist = distanceTo(a->left, val, length + 1);
+    int rightdist = distanceTo(a->right, val, length + 1);
+
+    return (leftdist + rightdist);
+}
+
+int getDistance( BinaryTreeNode* a, int val1, int val2 , int length) {
+
+    if ( !foundelement(a, val1) && !foundelement(a, val2)) {
+        cout << "one of the elements is missing! aborting operation..." << endl;
+    }
+
+    //base case: target value reached.
+    if ( (a->data == val1) ||  (a->data == val2) ) {
+        return length;
+    }
+
+    //case 1: both val1 and val2 are on the left side of current subtree
+    if ((val1 < a->data) && (val2 < a->data)) {
+        return getDistance(a->left, val1, val2, length);
+    }
+    //case 2: both val1 and val2 are on the right side of current subtree
+    if ((val1 > a->data) && (val2 > a->data)) {
+        return getDistance(a->right, val1, val2, length);
+    }
+    //case 3: val1 is to the left, val2 is to the right
+    if ((val1 < a->data) && (val2 > a->data)) {
+
+        int leftdist = distanceTo (a, val1, length);
+        int rightdist = distanceTo(a, val2, length);
+
+        return leftdist + rightdist;
+    }
+}
+
+int* rememberBinaryTreeNodes( BinaryTreeNode*a, int arr[], int i ) {
+    
+    if (a == nullptr)
+        return nullptr;
+    else {
+        arr[i] = a->data;
+        cout << arr[i] << endl;
+        i++;
+    }
+
+    int* temp = rememberBinaryTreeNodes(a->left, arr, i);
+    int* temp2 = rememberBinaryTreeNodes(a->right, arr, i);
+
+    return arr;
+}
+
+int countBinaryTreeNodes( BinaryTreeNode* a, int &count ) {
+
+    if (a == nullptr)
+        return 0;
+    else
+        count++;
+
+    int templeft = countBinaryTreeNodes(a->left, count);
+    int tempright = countBinaryTreeNodes(a->right, count);
+        
+    return count;
+        
+}
+int getLevel(BinaryTreeNode* a, int val, int i) {
+    if (a == nullptr)
+        return 0;
+    if (a->data == val)
+        return i;
+
+    int leftval = getLevel(a->left, val, i + 1);
+    int rightval = getLevel(a->right, val, i + 1);
+
+    return (max(leftval, rightval));
+}
+
+int sumcousins(BinaryTreeNode* a, int val) {
+
+    //step1: find level of targetvalnode
+    int level = getLevel(a, val, 1);
+    
+    //step2: store each sibling pair in a stack. Push each of those stacks into one queue.
+    cout << "Printing each node at level " << level << ": " << endl;
+    showNthLevel(a, level, 1);
+
+
+    //step3: iterate the queue. If any stack contains val, then continue. else, add that stacks' value to int result.
+
+    //step4: return result.
+    return 0;
+}
+
 
 int main()
 {
-    node* root1 = nullptr;
+    BinaryTreeNode* root1 = nullptr;
     insert(root1, 10);
     insert(root1, 11);
     insert(root1, 5);
@@ -315,7 +580,28 @@ int main()
     insert(root1, 12);
     insert(root1, 8);
     insert(root1, 4);
-    
+
+    //let,
+    int val = 16; 
+    int a = sumcousins(root1, val);
+
+}
+
+
+    /*
+    int level = 0;
+    int gensum = 0;
+    int i = 1;
+    int result = sumgen(root1, 5, level, i, gensum);
+    cout << "Result: " << result;
+    */
+
+    /*
+    //distance between BinaryTreeNodes
+    int length = 0;
+    cout << getDistance(root1, 8, 11, 0);*/
+
+    /*
     //SHOWING ALL SIBLING PAIRS ON THE NTH LEVEL
     //helper queue
     queue <int> q;
@@ -326,7 +612,7 @@ int main()
     showSiblingPairs(root1, level, i, count, q);
     
     /*
-    //SHOWING ALL NODES AT LEVEL n; starting iteration at i=1 
+    //SHOWING ALL BinaryTreeNodeS AT LEVEL n; starting iteration at i=1 
     int n = 2;
     int i = 1;
     showNthLevel(root1, n, i);
@@ -366,4 +652,3 @@ int main()
 
 
 
-}
