@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 
 struct BinaryTreeNode {
@@ -166,7 +167,11 @@ void showNthLevel( BinaryTreeNode*a, int n, int i) {
     //else, keep recursin'.
     showNthLevel(a->left, n, i+1);
     showNthLevel(a->right, n, i+1);
+
+
 }
+
+
 
 int countleavesintref( BinaryTreeNode*a, int &count) {
 
@@ -457,7 +462,6 @@ int returnLevel(BinaryTreeNode* a, int val, int level ) {
 }
 */
 
-
 bool foundelement (BinaryTreeNode* a, int val) {
     if (a == nullptr) return false;
 
@@ -469,6 +473,8 @@ bool foundelement (BinaryTreeNode* a, int val) {
     else
         return foundelement(a->right, val);
 }
+
+
 
 int distanceTo( BinaryTreeNode*a , int val, int length) {  //returns the distance from root BinaryTreeNode to destination BinaryTreeNodeS
     if (a == nullptr)
@@ -512,22 +518,6 @@ int getDistance( BinaryTreeNode* a, int val1, int val2 , int length) {
     }
 }
 
-int* rememberBinaryTreeNodes( BinaryTreeNode*a, int arr[], int i ) {
-    
-    if (a == nullptr)
-        return nullptr;
-    else {
-        arr[i] = a->data;
-        cout << arr[i] << endl;
-        i++;
-    }
-
-    int* temp = rememberBinaryTreeNodes(a->left, arr, i);
-    int* temp2 = rememberBinaryTreeNodes(a->right, arr, i);
-
-    return arr;
-}
-
 int countBinaryTreeNodes( BinaryTreeNode* a, int &count ) {
 
     if (a == nullptr)
@@ -541,6 +531,58 @@ int countBinaryTreeNodes( BinaryTreeNode* a, int &count ) {
     return count;
         
 }
+
+void storeNthLevelArray(BinaryTreeNode* a, int*& arr, int n, int i) {
+
+    if (a == nullptr) {     //trivial base case reached
+        cout << "null pointer" << i << ". Returning..." << endl;
+        return;
+    }
+
+    if (i == n) {           //intended base case reached
+        cout << "Target level " << i << " reached. Printing: " << (a->data) << endl;
+        return;
+    }
+
+    //else, keep recursin'.
+    storeNthLevelArray(a->left, arr, n, i + 1);
+    storeNthLevelArray(a->right, arr, n, i + 1);
+
+
+}
+
+
+void populateStackCousins(BinaryTreeNode* a, stack <int>& s, int val, int n, int i, int& stackindex) {
+
+
+    //if we are at the target level
+    if (i == n) {           //intended base case reached
+        
+        if (a->data == val || a == nullptr) {
+
+        }
+        else {
+            cout << "Adding level" << i << "node of value <<" << a->data << " to stack..." << endl;
+            s.push(a->data);
+        }
+        return;
+    }
+
+    //else, if we are outside the target nth level
+    if (a == nullptr) {     //trivial base case reached
+        return;
+    }
+
+    //else, keep recursin'.
+    populateStackCousins(a->left, s, val, n, i + 1, stackindex);
+    populateStackCousins(a->right, s, val, n, i + 1, stackindex);
+}
+
+
+int targetindex = 0;
+int siblingindex = 0;
+bool targetFound = 0;
+
 int getLevel(BinaryTreeNode* a, int val, int i) {
     if (a == nullptr)
         return 0;
@@ -553,21 +595,22 @@ int getLevel(BinaryTreeNode* a, int val, int i) {
     return (max(leftval, rightval));
 }
 
-int sumcousins(BinaryTreeNode* a, int val) {
-
-    //step1: find level of targetvalnode
-    int level = getLevel(a, val, 1);
+int sumcousins ( BinaryTreeNode* a, int val, int * &arr, int i, int &count ) {
     
-    //step2: store each sibling pair in a stack. Push each of those stacks into one queue.
-    cout << "Printing each node at level " << level << ": " << endl;
-    showNthLevel(a, level, 1);
+    int level = getLevel(a, i, 1);
 
+    stack <int> s;
+    int stackindex = 0;
 
-    //step3: iterate the queue. If any stack contains val, then continue. else, add that stacks' value to int result.
+    populateStackCousins(a, s, level, val, i, stackindex);
+    
 
-    //step4: return result.
+    
     return 0;
 }
+
+
+
 
 
 int main()
@@ -581,10 +624,13 @@ int main()
     insert(root1, 8);
     insert(root1, 4);
 
-    //let,
-    int val = 16; 
-    int a = sumcousins(root1, val);
+    int count = 0;
+    int val = 10;
+    int* arr = new int[7];
+    
+    cout << sumcousins(root1, val, arr, 1, count);
 
+    cout << arr[0] << endl;
 }
 
 
