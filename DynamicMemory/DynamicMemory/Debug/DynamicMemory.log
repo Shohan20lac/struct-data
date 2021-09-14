@@ -1,2 +1,6 @@
 ﻿  DynamicMemory.cpp
-  DynamicMemory.vcxproj -> C:\Users\shoha\source\repos\DynamicMemory\Debug\DynamicMemory.exe
+E:\dev\datastructPractice_1\DynamicMemory\DynamicMemory\DynamicMemory.cpp(348,26): error C2440: '=': cannot convert from 'const char [4]' to 'int'
+E:\dev\datastructPractice_1\DynamicMemory\DynamicMemory\DynamicMemory.cpp(348,21): message : There is no context in which this conversion is possible
+E:\dev\datastructPractice_1\DynamicMemory\DynamicMemory\DynamicMemory.cpp(376,22): error C2440: '=': cannot convert from 'const char [4]' to 'int'
+E:\dev\datastructPractice_1\DynamicMemory\DynamicMemory\DynamicMemory.cpp(376,17): message : There is no context in which this conversion is possible
+E:\dev\datastructPractice_1\DynamicMemory\DynamicMemory\DynamicMemory.cpp(129): fatal error C1075: '{': no matching token found

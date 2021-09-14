@@ -20,22 +20,6 @@ struct dllBinaryTreeBinaryTreeNode {
     
 };
 
-void printNumber(int x) {
-    //peculiar recursion example. Observe wisely!
-    if (x > 10) return;
-    
-    cout << x << endl;
-    
-    printNumber( ++x );
-
-    //think about all the variations:
-    //printNumber( x + 1 )
-    //printNumber( ++x + 1 )
-    //printNumber( x++ )
-
-    //what happens if you define function as &x?
-}
-
 void insert (BinaryTreeNode*& a, int x) {
     BinaryTreeNode* current = a; 
     if (current == nullptr) {
@@ -619,18 +603,22 @@ int main()
     insert(root1, 10);
     insert(root1, 11);
     insert(root1, 5);
-    insert(root1, 16);
-    insert(root1, 12);
-    insert(root1, 8);
-    insert(root1, 4);
+    //insert(root1, 16);
+    //insert(root1, 12);
+    //insert(root1, 8);
+    //insert(root1, 4);
 
     int count = 0;
     int val = 10;
     int* arr = new int[7];
     
-    cout << sumcousins(root1, val, arr, 1, count);
+    //cout << sumcousins(root1, val, arr, 1, count);
 
-    cout << arr[0] << endl;
+    //cout << arr[0] << endl;
+    int lncount = 0;
+    cout << countleftNodes(root1, lncount);
+
+
 }
 
 
