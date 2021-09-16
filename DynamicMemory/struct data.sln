@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graph", "Graph\Graph.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Q2 printLevel", "Q2 printLevel\Q2 printLevel.vcxproj", "{ABD4D3CD-4F48-406D-8B9D-45D42F846B03}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adjmat", "adjmat\adjmat.vcxproj", "{269FE87D-D810-4929-9BF8-A7B742973561}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -149,6 +151,14 @@ Global
 		{ABD4D3CD-4F48-406D-8B9D-45D42F846B03}.Release|x64.Build.0 = Release|x64
 		{ABD4D3CD-4F48-406D-8B9D-45D42F846B03}.Release|x86.ActiveCfg = Release|Win32
 		{ABD4D3CD-4F48-406D-8B9D-45D42F846B03}.Release|x86.Build.0 = Release|Win32
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Debug|x64.ActiveCfg = Debug|x64
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Debug|x64.Build.0 = Debug|x64
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Debug|x86.ActiveCfg = Debug|Win32
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Debug|x86.Build.0 = Debug|Win32
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Release|x64.ActiveCfg = Release|x64
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Release|x64.Build.0 = Release|x64
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Release|x86.ActiveCfg = Release|Win32
+		{269FE87D-D810-4929-9BF8-A7B742973561}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +175,7 @@ Global
 		{BAC8475B-57E4-461D-9118-5261DC6BACC8} = {F2DDD575-3452-4C56-B3F9-9CAD4B0A25BD}
 		{BC89DCF0-FDE9-4938-9AA0-EDBE4AC6FB3C} = {A035367F-161D-4C98-AC7C-7BFCBB53C704}
 		{ABD4D3CD-4F48-406D-8B9D-45D42F846B03} = {A035367F-161D-4C98-AC7C-7BFCBB53C704}
+		{269FE87D-D810-4929-9BF8-A7B742973561} = {A035367F-161D-4C98-AC7C-7BFCBB53C704}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {184EE166-F1B8-49AF-84B5-658FBDA60BD2}
