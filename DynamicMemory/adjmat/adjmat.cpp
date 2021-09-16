@@ -1,26 +1,73 @@
 #include <iostream>
 using namespace std;
 
+int vertexcount = 9;
+int* visitedArray = new int[vertexcount];
+
+
 struct Graph {
     
-    int adjmat[4][4];
+    int adjmat[9][9];
 
     Graph() {
 
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
+        for (int i = 0; i < vertexcount; i++)
+            for (int j = 0; j < vertexcount; j++)
                 adjmat[i][j] = 0;
     }    
 };
 
+void initVisited() {
+    for (int k = 0; k < vertexcount; k++)
+    {
+        for (int l = 0; l < vertexcount; l++)
+        {
+            visitedArray[k]= 0;
+        }
+    }
+}
+
+void resetVisited () {
+    for (int k = 0; k < vertexcount; k++)
+    {
+        for (int l = 0; l < vertexcount; l++)
+        {
+            visitedArray[k] = 0;
+        }
+    }
+}
 
 void addEdgeAdjMat( Graph * &g, int source, int dest) {
     g->adjmat[source][dest] = 1;
 }
 
+void showAdjMat( Graph *g ) {
+    for (int i = 0; i < vertexcount; i++)
+    {
+        for (int j = 0; j < vertexcount; j++)
+        {
+            cout << g->adjmat[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+bool isReachable( Graph* g, int n1, int n2 ) {      //tests whether n1 is reachable from n2.
+    return false;
+}
+
+
+void showPaths() {
+
+    
+
+}
+
 int main()
 {
     Graph* g = new Graph;
+
+    initVisited();
    
     addEdgeAdjMat(g, 0, 1);
     addEdgeAdjMat(g, 0, 8);
@@ -43,9 +90,7 @@ int main()
 
     addEdgeAdjMat(g, 8, 3);
 
-    cout << g->adjmat [8][3];
-
-    cout << "hi";
+    showAdjMat(g);
 
     return 0;
 }

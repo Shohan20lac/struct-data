@@ -1,2 +1,3 @@
-﻿  adjList.cpp
-  Graph.vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\Graph.exe
+﻿D:\Visual Studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Graph.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Q1_isReachable.cpp
+  Graph.vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\Q1 isReachable.exe
