@@ -1,4 +1,4 @@
 ﻿  HW3C.cpp
-E:\dev\datastructPractice_1\DynamicMemory\Hw3b\HW3C.cpp(111): warning C4715: 'hasDataAtIndex': not all control paths return a value
 E:\dev\datastructPractice_1\DynamicMemory\Hw3b\HW3C.cpp(133): warning C4715: 'hasDataAtEvenIndex': not all control paths return a value
+E:\dev\datastructPractice_1\DynamicMemory\Hw3b\HW3C.cpp(111): warning C4715: 'hasDataAtIndex': not all control paths return a value
   Hw3b.vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\HW3C.exe

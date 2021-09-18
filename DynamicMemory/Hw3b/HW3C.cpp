@@ -568,5 +568,12 @@ int main()
 {
     cout << "hello world!" << endl;
 
+    ListNode* head = new ListNode;
 
+    addNode(head, 1);
+    addNode(head, 2);
+    addNode(head, 3);
+    addNode(head, 3);
+    addNode(head, 5);
+    showNodes(head);
 }

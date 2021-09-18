@@ -1,0 +1,3 @@
+﻿  FInalRev.cpp
+E:\dev\datastructPractice_1\DynamicMemory\FInalRev\FInalRev.cpp(85): warning C4715: 'getDistance': not all control paths return a value
+  FInalRev.vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\FInalRev.exe

@@ -1,0 +1,3 @@
+Mango 10 20
+Pineapple 20 30 40 50
+Jackfruit 100

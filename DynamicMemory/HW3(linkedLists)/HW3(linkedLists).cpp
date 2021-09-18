@@ -85,6 +85,7 @@ void deleteNode(page* &head, int mycontent) {		//deletes ALL nodes that contain 
 				current->nextpage = (current->nextpage->nextpage);
 				cout << "Deleting page containing the value " << mycontent << endl;
 				delete trash;
+				return;
 			}
 			else {
 				current = current->nextpage;
@@ -229,10 +230,8 @@ int main()
 				addNode(head, 3);
 				addNode(head, 5);
 				showNodes(head);
-				
-				removeFront(head); removeFront(head);
 
-				removeBack2(head);
+				deleteNode(head, 2);
 				cout << endl;
 				showNodes(head);
 
