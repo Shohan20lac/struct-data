@@ -1,9 +1,10 @@
 ﻿D:\Visual Studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (HW3D.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   midprep.cpp
-E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(535,23): warning C4018: '<': signed/unsigned mismatch
-E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(542,27): warning C4018: '<': signed/unsigned mismatch
-E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(555,27): warning C4018: '<': signed/unsigned mismatch
-E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(569,23): warning C4018: '<': signed/unsigned mismatch
-E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(615,23): warning C4101: 'j': unreferenced local variable
-E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(615,21): warning C4101: 'i': unreferenced local variable
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(537,23): warning C4018: '<': signed/unsigned mismatch
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(544,27): warning C4018: '<': signed/unsigned mismatch
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(557,27): warning C4018: '<': signed/unsigned mismatch
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(571,23): warning C4018: '<': signed/unsigned mismatch
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(691,23): warning C4101: 'j': unreferenced local variable
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(691,21): warning C4101: 'i': unreferenced local variable
+E:\dev\datastructPractice_1\DynamicMemory\HW3D\midprep.cpp(778,21): warning C4101: 'x': unreferenced local variable
   HW3D.vcxproj -> E:\dev\datastructPractice_1\DynamicMemory\Debug\midprep.exe

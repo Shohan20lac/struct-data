@@ -464,17 +464,7 @@ void addNode(Customer *& head) {
     newnode->next = nullptr;
 }
 
-void makereceipt( Customer* head) {
-    ofstream outfile("outfile.txt");
 
-    outfile << "Customer Total Cost \t Elements brought" << endl;
-
-    Customer* current = head;
-    while (current != nullptr) {
-        outfile << current->cnumber << "\t\t" << current->totalcost << "\t\t" << listElements(current) << endl;
-        current = current->next;
-    }
-}
 
 void showNodes(Customer* head) {
     if (head == nullptr)
@@ -486,6 +476,18 @@ void showNodes(Customer* head) {
         current = current->next;
     }
     cout << endl << endl;
+}
+
+void makereceipt(Customer* head) {
+    ofstream outfile("outfile.txt");
+
+    outfile << "Customer Total Cost \t Elements brought" << endl;
+
+    Customer* current = head;
+    while (current != nullptr) {
+        outfile << current->cnumber << "\t\t" << current->totalcost << "\t\t" << listElements(current) << endl;
+        current = current->next;
+    }
 }
 
 void manageStore() {
@@ -574,6 +576,134 @@ void sortQ(queue <int> &Q) {
 
 }
 
+bool isPrime( int val ) {
+    //def (prime number): if undivisible by all numbers from 2 to n-1, then true.
+
+    for (int i = 2; i < val; i++)
+    {
+        if (val % i == 0)
+            return false;
+    }
+
+    //if made it this far without returning false...
+    return true;
+}
+
+void addPrimeRecursively(int arr[], int size, int i, int &sum)
+{
+
+    // base case
+    if (i == size) {
+        cout << "Finale prime sum: " << sum << endl << endl;
+        return;
+    }
+
+    cout << "Element number " << i << ": " << arr[i] << endl;
+    if (isPrime(arr[i]))
+    {
+        sum = sum + arr[i];
+        cout << "Number " << arr[i] << " added to prime sum. primesum: " << sum << endl;
+    }
+    else
+        cout << "NUmber " << arr[i] << " NOT added to prime sum." << endl;
+
+
+    i++;
+
+    // recursive call
+    addPrimeRecursively(arr, size, i, sum);
+}
+
+
+void primesum(int arr[], int size, int i, int sum)
+{
+
+    // base case
+    if (i == size) {
+        cout << sum;
+        return;
+    }
+
+    // check if ith element is prime
+    {
+        bool isPrime = 1;
+
+        int m = arr[i] / 2;
+
+        for (int j = 2; j <= m; j++)
+        {
+            if (arr[i] % j == 0) {
+                isPrime = 0;
+                break;
+            }
+        }
+
+        if (isPrime == 1)
+            sum = sum + arr[i];
+    }
+
+    i++;
+
+    // recursive call
+    primesum(arr, size, i, sum);
+}
+
+void del2nd(ListNode*& head) {
+    ListNode* current = head;
+    ListNode* prev;
+    int i = 0;
+
+    while (current != nullptr) {
+        if (i % 2 == 0) {
+            //do nothing. Just iterate.
+            prev = current;
+            current = current->next;
+            i++;
+        }
+        else {
+            //delete
+            ListNode* trash = current;
+            prev->next = current->next;
+            current = current->next;
+            delete trash;
+
+            i++;
+        }
+    }
+
+    //ListNode* trash = current-> next;
+    //current -> next = current->next-> next;
+    //delete trash;
+}
+
+void addNTimes(ListNode*& n, int x, int p) {
+
+    if (n == nullptr)
+        return;
+
+    ListNode* current = n;
+    int i = 0;
+
+    //init
+    ListNode* newnode = new ListNode;
+    newnode->data = x;
+    newnode->next = current->next;
+    current->next = newnode;
+
+    current = current->next->next;
+    i++;
+
+    while (current->next != nullptr && i < p) {
+        ListNode* newnode = new ListNode;
+        newnode->data = x;
+        newnode->next = current->next;
+        current->next = newnode;
+
+        current = current->next->next;
+        i++;
+    }
+}
+
 
 int main()
 {
@@ -650,9 +780,6 @@ int main()
             {
                 manageStore();
                 
-                
-
-                
             } break;
 
             case (5): //add N
@@ -684,6 +811,27 @@ int main()
                 Q.push(13);
 
                 sortQ(Q);
+            }
+
+            case (7): //isPrime, addPrimeRecursively 
+            {
+                //let...
+                int size = 5;
+                int sum = 0;
+                
+
+                int arr[5];
+                arr[0] = 3;
+                arr[1] = 3;
+                arr[2] = 10; 
+                arr[3] = 11; 
+                arr[4] = 8; 
+
+                //addPrimeRecursively(arr, size,0 , primesum);
+
+                int x;
+
+                primesum(arr, size, 0, sum);
             }
 
 
